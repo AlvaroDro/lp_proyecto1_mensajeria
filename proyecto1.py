@@ -21,7 +21,7 @@ def crearusuario(nombusu,contr,nombr,apell,direc,univ):
 
 	#datosguardados = json.dumps(diccionario)
 
-	with open((file_path), 'w') as file:
+	with open((file_path), 'a') as file:
 		json.dump(diccionario, file)
 
 
