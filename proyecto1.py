@@ -22,8 +22,14 @@ def crearusuario(nombusu,contr,nombr,apell,direc,univ):
 	#datosguardados = json.dumps(diccionario)
 
 	with open((file_path), 'a') as file:
+<<<<<<< HEAD
        		json.dump(diccionario, file)
 	# cambiar la 'w' por 'a'
+=======
+		json.dump(diccionario, file)
+
+
+>>>>>>> db60016077ca9bb4c6b5745c1dac91012fadd8e8
 
 	input("Usuario agregado exitosamente, presione enter para continuar")
 

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"Usuario": "lel", "Password": "lal", "Nombre": "lil", "Apellido": "lol", "Dirrecion": "lul", "Casa estudio": "lool"}{"Usuario": "nose", "Password": "no", "Nombre": "ne", "Apellido": "ni", "Dirrecion": "no", "Casa estudio": "nu"}
+=======
+{"Dirrecion": "asd", "Casa estudio": "asd", "Nombre": "asd", "Apellido": "asd", "Password": "123", "Usuario": "asd"}{"Dirrecion": "asd", "Casa estudio": "asd", "Nombre": "asd", "Apellido": "asd", "Password": "asd", "Usuario": "asd"}
+>>>>>>> db60016077ca9bb4c6b5745c1dac91012fadd8e8
