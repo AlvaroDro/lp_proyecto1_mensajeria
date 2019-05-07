@@ -161,7 +161,6 @@ while(continuar):
         for elemento in cargardatos:
             if nombre_usuario == elemento.get("Usuario"):
                 print("ese nombre de usuario ya esta utilizado")
-                print("si ingreso admin no puedes ingresar este nombre, ya que, solo se le permite a los administradores")
                 boleano=bool(0)
         if boleano:
             password = input("Ingrese su password de usuario\n")
