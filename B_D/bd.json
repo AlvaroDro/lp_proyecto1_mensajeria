@@ -1,1 +1,62 @@
-{"Dirrecion": "asd", "Casa estudio": "asd", "Nombre": "asd", "Apellido": "asd", "Password": "123", "Usuario": "asd"}{"Dirrecion": "asd", "Casa estudio": "asd", "Nombre": "asd", "Apellido": "asd", "Password": "asd", "Usuario": "asd"}{"Usuario": "lactunkk", "Password": "nosellama", "Nombre": "claudio", "Apellido": "lolino", "Dirrecion": "nose", "Casa estudio": "llama"}
+[
+    {
+        "Apellido": "anonimo",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "",
+                "Fuente": "",
+                "Mensaje": ""
+            }
+        ],
+        "Casa estudio": "anonimo",
+        "Dirrecion": "anonimo",
+        "Nombre": "anonimo",
+        "Password": "admin",
+        "Usuario": "admin"
+    },
+    {
+        "Apellido": "pavez",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "",
+                "Fuente": "",
+                "Mensaje": ""
+            }
+        ],
+        "Casa estudio": "ulagos",
+        "Dirrecion": "puerto",
+        "Nombre": "christopher",
+        "Password": "chris",
+        "Usuario": "lactunkk"
+    },
+    {
+        "Apellido": "lel",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "",
+                "Fuente": "",
+                "Mensaje": ""
+            }
+        ],
+        "Casa estudio": "lol",
+        "Dirrecion": "lil",
+        "Nombre": "nosellama",
+        "Password": "carlitos",
+        "Usuario": "jaime"
+    },
+    {
+        "Apellido": "del lol",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "",
+                "Fuente": "",
+                "Mensaje": ""
+            }
+        ],
+        "Casa estudio": "del invocador",
+        "Dirrecion": "grieta",
+        "Nombre": "teemin",
+        "Password": "capitan",
+        "Usuario": "Teemo"
+    }
+]
