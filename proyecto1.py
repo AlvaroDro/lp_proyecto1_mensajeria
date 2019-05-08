@@ -17,7 +17,7 @@ def cargar_archivo(path):
         contenido = json.load(archivo)
     return contenido
 
-def sobreescribir_archivo(path, dictionary):
+def sobrescribir_archivo(path, dictionary):
     """Summary
     
     Args:
@@ -25,12 +25,12 @@ def sobreescribir_archivo(path, dictionary):
         dictionary (dict): Diccionario que tiene datos nuevos para ser agregados al archivo ".json" 
     """
 
-    with open(path,'w') as file:
+    with open(path, 'w') as file:
         json.dump(dictionary, file, sort_keys=True, indent=4)
 
-def crearusuario(nombusu,contr,
-                nombr,apell,
-                direc,univ):
+def crear_usuario(nombusu, contr,
+                nombr, apell,
+                direc, univ):
     """Summary
     
     Args:
@@ -43,10 +43,10 @@ def crearusuario(nombusu,contr,
     """
     persona = {
                 "Nombre":"",
-                "Apellido":"",
+                "Usuario":"",
                 "Dirrecion":"",
                 "Casa estudio":"",
-                "Usuario":"",
+                "Apellido":"",
                 "Password":"",
                 "Bandeja de entrada":[{"Fuente":"","Asunto":"","Mensaje":""}] # o "Bandeja de entrada":[] verificar.
                 }
@@ -61,16 +61,80 @@ def crearusuario(nombusu,contr,
     data_base = [] 
     if open(file_path).read() == '':
         data_base.append(persona)
-        sobreescribir_archivo(file_path, data_base)
+        sobrescribir_archivo(file_path, data_base)
     else:
         nueva_persona = cargar_archivo(file_path)
         nueva_persona.append(persona)
-        sobreescribir_archivo(file_path, nueva_persona)
+        sobrescribir_archivo(file_path, nueva_persona)
 
     input("Usuario agregado exitosamente, presione enter para continuar")
 
+def iniciar_sesion(nombreu, contrau, file):
+    """Summary
+    
+    Args:
+        nombreu (String): Nombre del usuario
+        contrau (dict): Contraseña del usuario
+        file (string): Ruta donde se encuentra guardado el archivo ".json"
+    """
+    cargardatos = cargar_archivo(file)
+    for elemento in cargardatos:
+        if nombreu == elemento.get("Usuario") and contrau == elemento.get("Password"):
+            print("logeo exitoso")
+            while True:
+                print("Presione 'a' para entrar a la bandeja de entrada")
+                print("Presione 'b' para redactar un mensaje")
+                print("Presione 'c' para configurar su perfil")
+                print("Presione 'd' para salir de la cuenta")
+                opt = input("Digite su opcion: ")
+
+                if opt == 'a':
+                    print("hola")
+
+                elif opt == 'b':
+                    print("hola")
+
+                elif opt == 'c':
+                    while True:
+                        print("Presione 'a' para configurar su password")
+                        print("Presione 'b' para configurar su nombre")
+                        print("Presione 'c' para configurar su apellido")
+                        print("Presione 'd' para configurar su direccion")
+                        print("Presione 'e' para configurar su casa de estudio")
+                        print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
+                        opc = input("Digite su opcion: ")
+                        if opc == 'a':
+                             print("hola")
+                        elif opc == 'b':
+                            print("hola")
+                        elif opc == 'c':
+                            print("hola")
+                        elif opc == 'd':
+                            print("hola")
+                        elif opc == 'e':
+                            print("hola")
+                        elif opc == 'f':
+                	        print("Saliendo al menu de usuario")
+                	        break
+                        else:
+                            print("Opcion no valida, ingrese una de las opciones mostradas")
+
+                elif opt == 'd':
+                    print("Saliendo de la cuenta...")
+                    return bool('true')
+                    break
+                    
+                else:
+                    print("Opcion no valida, ingrese una de las opciones mostradas")
+
+    else:
+        print("Error de inicio de sesion, volviendo al menu principal")
+    return bool()
+
 
 continuar = True # condicion para el bucle while True = continuar False = salir
+
+
 
 while(continuar):
 
@@ -84,12 +148,14 @@ while(continuar):
 
     if opt == 'a':
 
-        nombreini = input("ingrese su nombre de usuario")
-
-        contraini = input("ingrese su password de usuario")
+        nombre_inicio = input("Ingrese su nombre de usuario\n")
+        contra_inicio = input("ingrese su password de usuario\n")
+        iniciar_sesion(nombre_inicio,contra_inicio,file_path)
+                
 
     elif opt == 'b':
 
+<<<<<<< HEAD
         nombreusu = input("Ingrese su nombre de usuario\n")
         password = input("Ingrese su password de usuario\n")
         nombrereal = input("Ingrese su nombre\n")
@@ -100,6 +166,26 @@ while(continuar):
         crearusuario(nombreusu,password,
                     nombrereal,apellido,
                     direccion,casaestudio)
+=======
+        cargardatos = cargar_archivo(file_path)
+        boleano = bool(1)
+        nombre_usuario = input("Ingrese su nombre de usuario\n")
+        for elemento in cargardatos:
+            if nombre_usuario == elemento.get("Usuario"):
+                print("ese nombre de usuario ya esta utilizado")
+                boleano=bool(0)
+        if boleano:
+            password = input("Ingrese su password de usuario\n")
+            nombre_real = input("Ingrese su nombre\n")
+            apellido = input("Ingrese su apellido\n")
+            direccion = input("Ingrese su dirrecion\n")
+            casa_de_estudio = input("Ingrese su casa de estudio\n")
+            crear_usuario(nombre_usuario, password,
+                          nombre_real, apellido,
+                          direccion, casa_de_estudio) 
+
+        
+>>>>>>> d650008ce4e03336d173e6b59f7cb4f9f5de0b87
 
     elif opt == 'c':
 
