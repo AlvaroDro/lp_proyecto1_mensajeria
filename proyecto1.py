@@ -155,7 +155,7 @@ while(continuar):
 
     elif opt == 'b':
 
-<<<<<<< HEAD
+#<<<<<<< HEAD
         nombreusu = input("Ingrese su nombre de usuario\n")
         password = input("Ingrese su password de usuario\n")
         nombrereal = input("Ingrese su nombre\n")
@@ -163,10 +163,10 @@ while(continuar):
         direccion = input("Ingrese su dirrecion\n")
         casaestudio = input("Ingrese su casa de estudio\n")
         
-        crearusuario(nombreusu,password,
+        crear_usuario(nombreusu,password,
                     nombrereal,apellido,
                     direccion,casaestudio)
-=======
+#=======
         cargardatos = cargar_archivo(file_path)
         boleano = bool(1)
         nombre_usuario = input("Ingrese su nombre de usuario\n")
@@ -185,7 +185,7 @@ while(continuar):
                           direccion, casa_de_estudio) 
 
         
->>>>>>> d650008ce4e03336d173e6b59f7cb4f9f5de0b87
+#>>>>>>> d650008ce4e03336d173e6b59f7cb4f9f5de0b87
 
     elif opt == 'c':
 
@@ -196,3 +196,5 @@ while(continuar):
         print("Opcion no valida, ingrese una de las opciones mostradas")
 
         input("Presione enter para continuar")
+
+
