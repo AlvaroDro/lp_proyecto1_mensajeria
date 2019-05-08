@@ -96,7 +96,7 @@ while(continuar):
         apellido = input("Ingrese su apellido\n")
         direccion = input("Ingrese su dirrecion\n")
         casaestudio = input("Ingrese su casa de estudio\n")
-		
+        
         crearusuario(nombreusu,password,
                     nombrereal,apellido,
                     direccion,casaestudio)
