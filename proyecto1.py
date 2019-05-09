@@ -159,7 +159,7 @@ while(continuar):
         boleano = bool(1)
         nombre_usuario = input("Ingrese su nombre de usuario\n")
         for elemento in cargardatos:
-            if nombre_usuario == elemento.get("Usuario"):
+            if nombre_usuario.lower() == elemento.get("Usuario"):
                 print("ese nombre de usuario ya esta utilizado")
                 boleano=bool(0)
         if boleano:
