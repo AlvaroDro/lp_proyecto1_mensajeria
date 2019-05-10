@@ -34,6 +34,13 @@ def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
     with open(ruta, 'w') as archivo:
         json.dump(diccionario_con_datos_nuevos, archivo, sort_keys=True, indent=4)
 
+def listar_usuarios():
+    
+    lista_usuarios = []
+    for elementos in cargar_archivo(ruta_del_archivo):
+        lista_usuarios.append(elementos.get("Usuario"))
+    return lista_usuarios
+
 def crear_usuario(nombre_usuario, password,
                 nombre, apellido,
                 direccion, universidad):
@@ -143,11 +150,10 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
     return bool()
 
 
-continuar = True # condicion para el bucle while True = continuar False = salir
 
 
 
-while(continuar):
+while True:
 
     print("Bienvenido al servicio de mensajeria")
     print("Presione 'a' si quiere iniciar sesion")
@@ -180,19 +186,19 @@ while(continuar):
 #eliminar/
 
         cargardatos = cargar_archivo(ruta_del_archivo)
-        boleano = bool(1)
-        nombre_usuario = input("Ingrese su nombre de usuario\n")
-        for elemento in cargardatos:
-            if nombre_usuario.lower() == elemento.get("Usuario"):
-                print("ese nombre de usuario ya esta utilizado")
-                boleano=bool(0)
-        if boleano:
+        while True:
+            nombre_usuario = input("Ingrese su nombre de usuario\n")
+            if nombre_usuario.lower() in listar_usuarios():
+                print("Ese nombre de ususario ya existe")
+                continue
+                
             password = input("Ingrese su password de usuario\n")
             nombre_real = input("Ingrese su nombre\n")
             apellido = input("Ingrese su apellido\n")
             direccion = input("Ingrese su dirrecion\n")
             casa_de_estudio = input("Ingrese su casa de estudio\n")
-            crear_usuario(nombre_usuario, password,
+            break
+        crear_usuario(nombre_usuario, password,
                           nombre_real, apellido,
                           direccion, casa_de_estudio) 
 
@@ -201,7 +207,7 @@ while(continuar):
 
     elif opt == 'c':
 
-        continuar = False
+        break
 
     else:
 
