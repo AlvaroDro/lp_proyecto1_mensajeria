@@ -35,7 +35,7 @@ def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
         json.dump(diccionario_con_datos_nuevos, archivo, sort_keys=True, indent=4)
 
 def listar_usuarios():
-    
+
     lista_usuarios = []
     for elementos in cargar_archivo(ruta_del_archivo):
         lista_usuarios.append(elementos.get("Usuario"))
@@ -79,6 +79,7 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
         archivo (string): Ruta donde se encuentra guardado el archivo ".json"
     """
     cargardatos = cargar_archivo(archivo)
+
     for elemento in cargardatos:
         if nombre_usuario == elemento.get("Usuario") and contra_usuario == elemento.get("Password"):
             print("logeo exitoso")
@@ -106,7 +107,6 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
 
                             sobrescribir_archivo(ruta_del_archivo, cargardatos)
                             break
-
 
                 elif opt == 'c':
                     while True:
@@ -151,7 +151,7 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
 
 
 
-
+##Main()por hacer 
 
 while True:
 
@@ -167,23 +167,11 @@ while True:
 
         nombre_inicio = input("Ingrese su nombre de usuario\n")
         contra_inicio = input("ingrese su password de usuario\n")
+
         iniciar_sesion(nombre_inicio,contra_inicio,ruta_del_archivo)
                 
 
     elif opt == 'b':
-
-#eliminar
-       # nombre_usuario = input("Ingrese su nombre de usuario\n")
-       # password = input("Ingrese su password de usuario\n")
-        #nombre_real = input("Ingrese su nombre\n")
-        #apellido = input("Ingrese su apellido\n")
-       # direccion = input("Ingrese su dirrecion\n")
-        #casa_de_estudio = input("Ingrese su casa de estudio\n")
-        
-       # crear_usuario(nombre_usuario,password,
-        #            nombre_real,apellido,
-         #           direccion,casa_de_estudio)
-#eliminar/
 
         cargardatos = cargar_archivo(ruta_del_archivo)
         while True:
@@ -201,9 +189,6 @@ while True:
         crear_usuario(nombre_usuario, password,
                           nombre_real, apellido,
                           direccion, casa_de_estudio) 
-
-        
-
 
     elif opt == 'c':
 
