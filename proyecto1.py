@@ -1,85 +1,79 @@
 import json
 import os
 
-file_path = "B_D/bd.json" #ruta donde se guardara el json
+ruta_del_archivo = "B_D/bd.json" #ruta donde se guardara el json
 
-def cargar_archivo(path):
+def cargar_archivo(ruta):
     """Summary
     
     Args:
-        path (string): Ruta donde se encuentra guardado el archivo ".json"
+        ruta (string): Ruta donde se encuentra guardado el archivo ".json"
     
     Returns:
         List: Retorna una lista de diccionarios 
     """
 
-    with open(path) as archivo:
-        contenido = json.load(archivo)
-    return contenido
+    
+    if open(ruta).read() != '':
+        with open(ruta) as archivo:
+            contenido = json.load(archivo)
+        return contenido
+    else:
+        datos="[]"
+        with open(ruta, 'w') as archivo:
+            json.dump(ruta, datos)
 
-def sobrescribir_archivo(path, dictionary):
+def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
     """Summary
     
     Args:
-        path (String): Ruta donde se encuentra guardado el archivo ".json"
-        dictionary (dict): Diccionario que tiene datos nuevos para ser agregados al archivo ".json" 
+        ruta (String): Ruta donde se encuentra guardado el archivo ".json"
+        diccionario_con_datos_nuevos (dict): Diccionario que tiene datos nuevos para ser agregados al archivo ".json" 
     """
 
-    with open(path, 'w') as file:
-        json.dump(dictionary, file, sort_keys=True, indent=4)
+    with open(ruta, 'w') as archivo:
+        json.dump(diccionario_con_datos_nuevos, archivo, sort_keys=True, indent=4)
 
-def crear_usuario(nombusu, contr,
-                nombr, apell,
-                direc, univ):
+def crear_usuario(nombre_usuario, password,
+                nombre, apellido,
+                direccion, universidad):
     """Summary
     
     Args:
-        nombusu (String): Nombre de usuario de la persona.
-        contr (String): Contraseña de la persona.
-        nombr (String): Nombre real de la persona.
-        apell (String): Apellido de la persona.
-        direc (String): Dirección de la persona.
-        univ (String): Casa de estudio de la persona.
+        nombre_usuario (String): Nombre de usuario de la persona.
+        password (String): Contraseña de la persona.
+        nombre (String): Nombre real de la persona.
+        apellido (String): Apellido de la persona.
+        direccion (String): Dirección de la persona.
+        universidad (String): Casa de estudio de la persona.
     """
     persona = {
-                "Nombre":"",
-                "Usuario":"",
-                "Dirrecion":"",
-                "Casa estudio":"",
-                "Apellido":"",
-                "Password":"",
-                "Bandeja de entrada":[{"Fuente":"","Asunto":"","Mensaje":""}] # o "Bandeja de entrada":[] verificar.
+                "Nombre":nombre,
+                "Apellido":apellido,
+                "Usuario":nombre_usuario,
+                "Password":password,
+                "Dirrecion":direccion,
+                "Casa estudio":universidad,               
+                "Bandeja de entrada":[] # o "Bandeja de entrada":[] verificar.{"Fuente":"","Asunto":"","Mensaje":""}.
                 }
 
-    persona["Usuario"] = nombusu
-    persona["Password"] = contr
-    persona["Nombre"] = nombr
-    persona["Apellido"] = apell
-    persona["Dirrecion"] = direc
-    persona["Casa estudio"] = univ
-
-    data_base = [] 
-    if open(file_path).read() == '':
-        data_base.append(persona)
-        sobrescribir_archivo(file_path, data_base)
-    else:
-        nueva_persona = cargar_archivo(file_path)
-        nueva_persona.append(persona)
-        sobrescribir_archivo(file_path, nueva_persona)
+    nueva_persona = cargar_archivo(ruta_del_archivo)
+    nueva_persona.append(persona)
+    sobrescribir_archivo(ruta_del_archivo, nueva_persona)
 
     input("Usuario agregado exitosamente, presione enter para continuar")
 
-def iniciar_sesion(nombreu, contrau, file):
+def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
     """Summary
     
     Args:
-        nombreu (String): Nombre del usuario
-        contrau (dict): Contraseña del usuario
-        file (string): Ruta donde se encuentra guardado el archivo ".json"
+        nombre_usuario (String): Nombre del usuario
+        contra_usuario (dict): Contraseña del usuario
+        archivo (string): Ruta donde se encuentra guardado el archivo ".json"
     """
-    cargardatos = cargar_archivo(file)
+    cargardatos = cargar_archivo(archivo)
     for elemento in cargardatos:
-        if nombreu == elemento.get("Usuario") and contrau == elemento.get("Password"):
+        if nombre_usuario == elemento.get("Usuario") and contra_usuario == elemento.get("Password"):
             print("logeo exitoso")
             while True:
                 print("Presione 'a' para entrar a la bandeja de entrada")
@@ -89,10 +83,23 @@ def iniciar_sesion(nombreu, contrau, file):
                 opt = input("Digite su opcion: ")
 
                 if opt == 'a':
-                    print("hola")
+                    print(elemento.get("Bandeja de entrada"))
 
                 elif opt == 'b':
-                    print("hola")
+                    print("Ingrese el destinatario")
+                    mensaje_destinatario = input("Ingrese el destinatario")
+                    for usuarios in cargardatos:
+                        if mensaje_destinatario.lower() in usuarios["Usuario"]:
+                            indice = cargardatos.index(usuarios)
+                            print(indice)
+                            mensaje_asunto = input("Ingrese el asunto (opcional)")
+                            mensaje_redactato = input("Escriba el mensaje")
+                            mensaje = {"Asunto":mensaje_asunto,"Emisor":elemento.get("Usuario"),"Mensaje":mensaje_redactato}
+                            cargardatos[indice]["Bandeja de entrada"].append(mensaje)
+
+                            sobrescribir_archivo(ruta_del_archivo, cargardatos)
+                            break
+
 
                 elif opt == 'c':
                     while True:
@@ -104,7 +111,11 @@ def iniciar_sesion(nombreu, contrau, file):
                         print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
                         opc = input("Digite su opcion: ")
                         if opc == 'a':
-                             print("hola")
+
+                            nueva_pass = input("Ingrese su nueva pass")
+                            elemento["Password"] = nueva_pass.lower()
+                            sobrescribir_archivo(ruta_del_archivo,cargardatos)
+                            print("hola")
                         elif opc == 'b':
                             print("hola")
                         elif opc == 'c':
@@ -150,24 +161,25 @@ while(continuar):
 
         nombre_inicio = input("Ingrese su nombre de usuario\n")
         contra_inicio = input("ingrese su password de usuario\n")
-        iniciar_sesion(nombre_inicio,contra_inicio,file_path)
+        iniciar_sesion(nombre_inicio,contra_inicio,ruta_del_archivo)
                 
 
     elif opt == 'b':
 
-
-        nombreusu = input("Ingrese su nombre de usuario\n")
-        password = input("Ingrese su password de usuario\n")
-        nombrereal = input("Ingrese su nombre\n")
-        apellido = input("Ingrese su apellido\n")
-        direccion = input("Ingrese su dirrecion\n")
-        casaestudio = input("Ingrese su casa de estudio\n")
+#eliminar
+       # nombre_usuario = input("Ingrese su nombre de usuario\n")
+       # password = input("Ingrese su password de usuario\n")
+        #nombre_real = input("Ingrese su nombre\n")
+        #apellido = input("Ingrese su apellido\n")
+       # direccion = input("Ingrese su dirrecion\n")
+        #casa_de_estudio = input("Ingrese su casa de estudio\n")
         
-        crear_usuario(nombreusu,password,
-                    nombrereal,apellido,
-                    direccion,casaestudio)
+       # crear_usuario(nombre_usuario,password,
+        #            nombre_real,apellido,
+         #           direccion,casa_de_estudio)
+#eliminar/
 
-        cargardatos = cargar_archivo(file_path)
+        cargardatos = cargar_archivo(ruta_del_archivo)
         boleano = bool(1)
         nombre_usuario = input("Ingrese su nombre de usuario\n")
         for elemento in cargardatos:
