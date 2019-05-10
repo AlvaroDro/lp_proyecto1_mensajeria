@@ -104,7 +104,7 @@ def iniciar_sesion(nombreu, contrau, file):
                         print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
                         opc = input("Digite su opcion: ")
                         if opc == 'a':
-                             print("hola")
+                            print("hola")
                         elif opc == 'b':
                             print("hola")
                         elif opc == 'c':
