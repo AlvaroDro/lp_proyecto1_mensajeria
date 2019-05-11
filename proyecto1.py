@@ -82,6 +82,7 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
 
     for elemento in cargardatos:
         if nombre_usuario == elemento.get("Usuario") and contra_usuario == elemento.get("Password"):
+
             print("logeo exitoso")
             while True:
                 print("Presione 'a' para entrar a la bandeja de entrada")
@@ -94,12 +95,10 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
                     print(elemento.get("Bandeja de entrada"))
 
                 elif opt == 'b':
-                    print("Ingrese el destinatario")
                     mensaje_destinatario = input("Ingrese el destinatario")
                     for usuarios in cargardatos:
                         if mensaje_destinatario.lower() in usuarios["Usuario"]:
                             indice = cargardatos.index(usuarios)
-                            print(indice)
                             mensaje_asunto = input("Ingrese el asunto (opcional)")
                             mensaje_redactato = input("Escriba el mensaje")
                             mensaje = {"Asunto":mensaje_asunto,"Emisor":elemento.get("Usuario"),"Mensaje":mensaje_redactato}
@@ -145,9 +144,11 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
                 else:
                     print("Opcion no valida, ingrese una de las opciones mostradas")
 
-    else:
-        print("Error de inicio de sesion, volviendo al menu principal")
-    return bool()
+        else:
+            print("Error de inicio de sesion, volviendo al menu principal")
+            #break
+    
+
 
 
 
