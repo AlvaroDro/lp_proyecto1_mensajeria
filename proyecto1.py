@@ -78,7 +78,7 @@ def vista_de_sesion(indice_cuenta):
         print("Presione 'd' para salir de la cuenta")
         opt = input("Digite su opcion: ")
 
-        if opt == 'a':
+        if opt == 'a': # Terminar de agregar restricciones
             bandeja = cargardatos[indice_cuenta].get("Bandeja de entrada")
             while True:
                 if bandeja[0]["Mensaje"] == '':
@@ -91,8 +91,29 @@ def vista_de_sesion(indice_cuenta):
                                 "\n\nMensaje:\n"+elementos.get("Mensaje")+"\n"
                             )
                     break
+            while True:
+                print("1.-Eliminar mensaje")
+                print("2.-Responder")
+                opcion = input("")
+                if opcion == "1":
+                    eliminar_mensaje = input("Ingrese el numero del mensaje a eliminar")
+                    cargardatos[indice_cuenta]["Bandeja de entrada"].pop(int(eliminar_mensaje))
 
-        elif opt == 'b':
+                    sobrescribir_archivo(ruta_del_archivo, cargardatos)
+                elif opcion =="2":
+                    responder_mensaje = input("Ingrese el numero del mensaje a responder")
+                    persona_a_responder = bandeja[int(responder_mensaje)].get("Emisor")
+                    if persona_a_responder in listar_usuarios():
+                        indice = listar_usuarios().index(persona_a_responder)
+                    mensaje_asunto = input("Ingrese el asunto (opcional)")
+                    mensaje_redactato = input("Escriba el mensaje")
+                    mensaje = {"Asunto":mensaje_asunto,"Emisor":cargardatos[indice_cuenta].get("Usuario"),"Mensaje":mensaje_redactato}
+                    cargardatos[indice]["Bandeja de entrada"].append(mensaje)
+
+                    sobrescribir_archivo(ruta_del_archivo, cargardatos)
+
+                break
+        elif opt == 'b': # ver si se necesitan restricciones 
 
             print("Ingrese el destinatario")
             mensaje_destinatario = input("Ingrese el destinatario")
