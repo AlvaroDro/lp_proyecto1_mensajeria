@@ -11,9 +11,7 @@ def cargar_archivo(ruta):
     
     Returns:
         List: Retorna una lista de diccionarios 
-    """
-
-    
+    """  
     if open(ruta).read() != '':
         with open(ruta) as archivo:
             contenido = json.load(archivo)
@@ -71,9 +69,8 @@ def crear_usuario(nombre_usuario, password,
     input("Usuario agregado exitosamente, presione enter para continuar")
 
 
-def vista_de_sesion(indexd):
+def vista_de_sesion(indice_cuenta):
     cargardatos = cargar_archivo(ruta_del_archivo)
-    indice_cuenta = indexd
     while True:
         print("Presione 'a' para entrar a la bandeja de entrada")
         print("Presione 'b' para redactar un mensaje")
@@ -82,13 +79,28 @@ def vista_de_sesion(indexd):
         opt = input("Digite su opcion: ")
 
         if opt == 'a':
-            print(cargardatos[indice_cuenta].get("Bandeja de entrada"))
+            bandeja = cargardatos[indice_cuenta].get("Bandeja de entrada")
+            while True:
+                if bandeja[0]["Mensaje"] == '':
+                    print("No tiene, ningun nuevo mensaje")
+                    break
+                else:
+                    print("\nMensajes recibidos")
+                    for elementos in bandeja:
+                        print("\nFuente: "+elementos.get("Emisor")+"\tAsunto: "+elementos.get("Asunto"),
+                                "\n\nMensaje:\n"+elementos.get("Mensaje")+"\n"
+                            )
+                    break
 
         elif opt == 'b':
+
             print("Ingrese el destinatario")
             mensaje_destinatario = input("Ingrese el destinatario")
+
             for usuarios in cargardatos:
+
                 if mensaje_destinatario.lower() in usuarios["Usuario"]:
+
                     indice= cargardatos.index(usuarios)
                     mensaje_asunto = input("Ingrese el asunto (opcional)")
                     mensaje_redactato = input("Escriba el mensaje")
@@ -132,7 +144,8 @@ def vista_de_sesion(indexd):
             break
                     
         else:
-            print("Opcion no valida, ingrese una de las opciones mostradas")    
+            print("Opcion no valida, ingrese una de las opciones mostradas")
+
 
 def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
     """Summary
