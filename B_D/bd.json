@@ -66,6 +66,11 @@
                 "Asunto": "",
                 "Fuente": "",
                 "Mensaje": ""
+            },
+            {
+                "Asunto": "Respuesta al pago",
+                "Emisor": "gust",
+                "Mensaje": "Esta es la respuesta que estabas esperando te subimos el sueldo a $2clp"
             }
         ],
         "Casa estudio": "asd",
@@ -170,11 +175,6 @@
     {
         "Apellido": "asd",
         "Bandeja de entrada": [
-            {
-                "Asunto": "asd",
-                "Emisor": "asd",
-                "Mensaje": "asd"
-            },
             {
                 "Asunto": "esto es una prueba",
                 "Emisor": "asd",
