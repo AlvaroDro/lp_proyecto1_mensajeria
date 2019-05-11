@@ -143,11 +143,15 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
         archivo (string): Ruta donde se encuentra guardado el archivo ".json"
     """
     cargardatos = cargar_archivo(archivo)
-    indice = listar_usuarios().index(nombre_usuario)
     while True:
-        if  nombre_usuario in listar_usuarios() and cargardatos[indice]["Password"] == contra_usuario:
-            return vista_de_sesion(indice)
-            print("logeo exitoso")
+        if  nombre_usuario in listar_usuarios():
+            indice = listar_usuarios().index(nombre_usuario)
+            if  cargardatos[indice]["Password"] == contra_usuario:
+                print("logeo exitoso")
+                return vista_de_sesion(indice)
+            else:
+                print("Error de inicio de sesion, volviendo al menu principal")
+                break
         else:
             print("Error de inicio de sesion, volviendo al menu principal")
             break
