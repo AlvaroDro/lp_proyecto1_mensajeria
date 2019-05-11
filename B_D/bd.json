@@ -194,6 +194,11 @@
                 "Asunto": "asd",
                 "Emisor": "asd",
                 "Mensaje": "prueba"
+            },
+            {
+                "Asunto": "asd",
+                "Emisor": "asd",
+                "Mensaje": "Esta en una prueba de la nueva funcion"
             }
         ],
         "Casa estudio": "asd",
