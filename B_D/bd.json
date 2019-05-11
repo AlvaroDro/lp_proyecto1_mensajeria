@@ -1,62 +1,20 @@
-[ 
- {
-        "Apellido": "anonimo",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "anonimo",
-        "Dirrecion": "anonimo",
-        "Nombre": "anonimo",
-        "Password": "admin",
-        "Usuario": "admin"
+[
+    {
+        "Apellido": "qlao",
+        "Bandeja de entrada": [],
+        "Casa estudio": "de",
+        "Dirrecion": "gay",
+        "Nombre": "diego",
+        "Password": "006",
+        "Usuario": "Diegai"
     },
     {
         "Apellido": "pavez",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "ulagos",
-        "Dirrecion": "puerto",
-        "Nombre": "christopher",
+        "Bandeja de entrada": [],
+        "Casa estudio": "larga",
+        "Dirrecion": "pene",
+        "Nombre": "chris",
         "Password": "chris",
         "Usuario": "lactunkk"
-    },
-    {
-        "Apellido": "lel",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "lol",
-        "Dirrecion": "lil",
-        "Nombre": "nosellama",
-        "Password": "carlitos",
-        "Usuario": "jaime"
-    },
-    {
-        "Apellido": "del lol",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "del invocador",
-        "Dirrecion": "grieta",
-        "Nombre": "teemin",
-        "Password": "capitan",
-        "Usuario": "Teemo"
     }
 ]

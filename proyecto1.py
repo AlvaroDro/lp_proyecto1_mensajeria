@@ -1,199 +1,201 @@
 import json
 import os
 
-file_path = "B_D/bd.json" #ruta donde se guardara el json
+ruta_del_archivo = "B_D/bd.json" #ruta donde se guardara el json
 
-def cargar_archivo(path):
-    """Summary
-    
-    Args:
-        path (string): Ruta donde se encuentra guardado el archivo ".json"
-    
-    Returns:
-        List: Retorna una lista de diccionarios 
-    """
+def cargar_archivo(ruta):
+	"""Summary
+	
+	Args:
+		ruta (string): Ruta donde se encuentra guardado el archivo ".json"
+	
+	Returns:
+		List: Retorna una lista de diccionarios 
+	"""
 
-    with open(path) as archivo:
-        contenido = json.load(archivo)
-    return contenido
+	
+	if open(ruta).read() != '':   #abre la ruta y lee si no esta vacia
+		with open(ruta) as archivo:
+			contenido = json.load(archivo) #carga los archivos del json
+		return contenido
+	else:
+		datos="[]"            # esta vacio 
+		with open(ruta, 'w') as archivo:
+			json.dump(ruta, datos) # mete [] almenos al json
 
-def sobrescribir_archivo(path, dictionary):
-    """Summary
-    
-    Args:
-        path (String): Ruta donde se encuentra guardado el archivo ".json"
-        dictionary (dict): Diccionario que tiene datos nuevos para ser agregados al archivo ".json" 
-    """
+def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
+	"""Summary
+	
+	Args:
+		ruta (String): Ruta donde se encuentra guardado el archivo ".json"
+		diccionario_con_datos_nuevos (dict): Diccionario que tiene datos nuevos para ser agregados al archivo ".json" 
+	"""
 
-    with open(path, 'w') as file:
-        json.dump(dictionary, file, sort_keys=True, indent=4)
+	with open(ruta, 'w') as archivo:
+		json.dump(diccionario_con_datos_nuevos, archivo, sort_keys=True, indent=4) #sobre escribe el json antiguo con el mismo pero con el nuevo usuario
+        #indent=4 hace que pueda tener espacios el json
+def listar_usuarios():
 
-def crear_usuario(nombusu, contr,
-                nombr, apell,
-                direc, univ):
-    """Summary
-    
-    Args:
-        nombusu (String): Nombre de usuario de la persona.
-        contr (String): Contraseña de la persona.
-        nombr (String): Nombre real de la persona.
-        apell (String): Apellido de la persona.
-        direc (String): Dirección de la persona.
-        univ (String): Casa de estudio de la persona.
-    """
-    persona = {
-                "Nombre":"",
-                "Usuario":"",
-                "Dirrecion":"",
-                "Casa estudio":"",
-                "Apellido":"",
-                "Password":"",
-                "Bandeja de entrada":[{"Fuente":"","Asunto":"","Mensaje":""}] # o "Bandeja de entrada":[] verificar.
-                }
+	lista_usuarios = [] # crea nueva lista_usuarios
+	for elementos in cargar_archivo(ruta_del_archivo): # llama a la funcion cargar_archivos y los deja relacionado con una variable elemento
+		lista_usuarios.append(elementos.get("Usuario")) # la lista_usuarios se llena con los elementos del json 'usuarios'
+	return lista_usuarios #retorna la lista ya con todos los nombres de usuarios en el json
 
-    persona["Usuario"] = nombusu
-    persona["Password"] = contr
-    persona["Nombre"] = nombr
-    persona["Apellido"] = apell
-    persona["Dirrecion"] = direc
-    persona["Casa estudio"] = univ
+def crear_usuario(nombre_usuario, password,
+				nombre, apellido,
+				direccion, universidad):
+	"""Summary
+	
+	Args:
+		nombre_usuario (String): Nombre de usuario de la persona.
+		password (String): Contraseña de la persona.
+		nombre (String): Nombre real de la persona.
+		apellido (String): Apellido de la persona.
+		direccion (String): Dirección de la persona.
+		universidad (String): Casa de estudio de la persona.
+	"""
+	persona = {
+				"Nombre":nombre,
+				"Apellido":apellido,
+				"Usuario":nombre_usuario,
+				"Password":password,
+				"Dirrecion":direccion,
+				"Casa estudio":universidad,               
+				"Bandeja de entrada":[] # o "Bandeja de entrada":[] verificar.{"Fuente":"","Asunto":"","Mensaje":""}.
+				}
 
-    data_base = [] 
-    if open(file_path).read() == '':
-        data_base.append(persona)
-        sobrescribir_archivo(file_path, data_base)
-    else:
-        nueva_persona = cargar_archivo(file_path)
-        nueva_persona.append(persona)
-        sobrescribir_archivo(file_path, nueva_persona)
+	nueva_persona = cargar_archivo(ruta_del_archivo) # carga los datos del json a nueva_persona
+	nueva_persona.append(persona) # nueva_persona recibe el diccionario con los nuevos datos del nuevo usuario (diccionario=persona)
+	sobrescribir_archivo(ruta_del_archivo, nueva_persona) # pasa parametros de la ubicacion del json y todos los datos del json + el nuevo usuario
 
-    input("Usuario agregado exitosamente, presione enter para continuar")
+	input("Usuario agregado exitosamente, presione enter para continuar")
 
-def iniciar_sesion(nombreu, contrau, file):
-    """Summary
-    
-    Args:
-        nombreu (String): Nombre del usuario
-        contrau (dict): Contraseña del usuario
-        file (string): Ruta donde se encuentra guardado el archivo ".json"
-    """
-    cargardatos = cargar_archivo(file)
-    for elemento in cargardatos:
-        if nombreu == elemento.get("Usuario") and contrau == elemento.get("Password"):
-            print("logeo exitoso")
-            while True:
-                print("Presione 'a' para entrar a la bandeja de entrada")
-                print("Presione 'b' para redactar un mensaje")
-                print("Presione 'c' para configurar su perfil")
-                print("Presione 'd' para salir de la cuenta")
-                opt = input("Digite su opcion: ")
+def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
+	"""Summary
+	
+	Args:
+		nombre_usuario (String): Nombre del usuario
+		contra_usuario (dict): Contraseña del usuario
+		archivo (string): Ruta donde se encuentra guardado el archivo ".json"
+	"""
+	cargardatos = cargar_archivo(archivo)
 
-                if opt == 'a':
-                    print("hola")
+	for elemento in cargardatos:
+		if nombre_usuario == elemento.get("Usuario") and contra_usuario == elemento.get("Password"):
+			print("logeo exitoso")
+			while True:
+				print("Presione 'a' para entrar a la bandeja de entrada")
+				print("Presione 'b' para redactar un mensaje")
+				print("Presione 'c' para configurar su perfil")
+				print("Presione 'd' para salir de la cuenta")
+				opt = input("Digite su opcion: ")
 
-                elif opt == 'b':
-                    print("hola")
+				if opt == 'a':
+					print(elemento.get("Bandeja de entrada"))
 
-                elif opt == 'c':
-                    while True:
-                        print("Presione 'a' para configurar su password")
-                        print("Presione 'b' para configurar su nombre")
-                        print("Presione 'c' para configurar su apellido")
-                        print("Presione 'd' para configurar su direccion")
-                        print("Presione 'e' para configurar su casa de estudio")
-                        print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
-                        opc = input("Digite su opcion: ")
-                        if opc == 'a':
-                            print("hola")
-                        elif opc == 'b':
-                            print("hola")
-                        elif opc == 'c':
-                            print("hola")
-                        elif opc == 'd':
-                            print("hola")
-                        elif opc == 'e':
-                            print("hola")
-                        elif opc == 'f':
-                	        print("Saliendo al menu de usuario")
-                	        break
-                        else:
-                            print("Opcion no valida, ingrese una de las opciones mostradas")
+				elif opt == 'b':
+					print("Ingrese el destinatario")
+					mensaje_destinatario = input("Ingrese el destinatario")
+					for usuarios in cargardatos:
+						if mensaje_destinatario.lower() in usuarios["Usuario"]:
+							indice = cargardatos.index(usuarios)
+							print(indice)
+							mensaje_asunto = input("Ingrese el asunto (opcional)")
+							mensaje_redactato = input("Escriba el mensaje")
+							mensaje = {"Asunto":mensaje_asunto,"Emisor":elemento.get("Usuario"),"Mensaje":mensaje_redactato}
+							cargardatos[indice]["Bandeja de entrada"].append(mensaje)
 
-                elif opt == 'd':
-                    print("Saliendo de la cuenta...")
-                    return bool('true')
-                    break
-                    
-                else:
-                    print("Opcion no valida, ingrese una de las opciones mostradas")
+							sobrescribir_archivo(ruta_del_archivo, cargardatos)
+							break
 
-    else:
-        print("Error de inicio de sesion, volviendo al menu principal")
-    return bool()
+				elif opt == 'c':
+					while True:
+						print("Presione 'a' para configurar su password")
+						print("Presione 'b' para configurar su nombre")
+						print("Presione 'c' para configurar su apellido")
+						print("Presione 'd' para configurar su direccion")
+						print("Presione 'e' para configurar su casa de estudio")
+						print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
+						opc = input("Digite su opcion: ")
+						if opc == 'a':
 
 
-continuar = True # condicion para el bucle while True = continuar False = salir
+							nueva_pass = input("Ingrese su nueva pass")
+							elemento["Password"] = nueva_pass.lower()
+							sobrescribir_archivo(ruta_del_archivo,cargardatos)
+							print("hola")
+						elif opc == 'b':
+							print("hola")
+						elif opc == 'c':
+							print("hola")
+						elif opc == 'd':
+							print("hola")
+						elif opc == 'e':
+							print("hola")
+						elif opc == 'f':
+							print("Saliendo al menu de usuario")
+							break
+						else:
+							print("Opcion no valida, ingrese una de las opciones mostradas")
+
+				elif opt == 'd':
+					print("Saliendo de la cuenta...")
+					return True
+					break
+					
+				else:
+					print("Opcion no valida, ingrese una de las opciones mostradas")
+
+	else:
+		print("Error de inicio de sesion, volviendo al menu principal")
 
 
+##Main()por hacer 
 
-while(continuar):
+while True:
 
-    print("Bienvenido al servicio de mensajeria")
-    print("Presione 'a' si quiere iniciar sesion")
-    print("Presione 'b' si quiere crear una nueva cuenta")
-    print("Presione 'c' si quiere salir del servicio de mensajeria")
+	print("Bienvenido al servicio de mensajeria")
+	print("Presione 'a' si quiere iniciar sesion")
+	print("Presione 'b' si quiere crear una nueva cuenta")
+	print("Presione 'c' si quiere salir del servicio de mensajeria")
 
-    opt = input("Digite su opcion: ")
-
-
-    if opt == 'a':
-
-        nombre_inicio = input("Ingrese su nombre de usuario\n")
-        contra_inicio = input("ingrese su password de usuario\n")
-        iniciar_sesion(nombre_inicio,contra_inicio,file_path)
-                
-
-    elif opt == 'b':
+	opt = input("Digite su opcion: ")
 
 
-        nombreusu = input("Ingrese su nombre de usuario\n")
-        password = input("Ingrese su password de usuario\n")
-        nombrereal = input("Ingrese su nombre\n")
-        apellido = input("Ingrese su apellido\n")
-        direccion = input("Ingrese su dirrecion\n")
-        casaestudio = input("Ingrese su casa de estudio\n")
-        
-        crear_usuario(nombreusu,password,
-                    nombrereal,apellido,
-                    direccion,casaestudio)
+	if opt == 'a':
 
-        cargardatos = cargar_archivo(file_path)
-        boleano = bool(1)
-        nombre_usuario = input("Ingrese su nombre de usuario\n")
-        for elemento in cargardatos:
-            if nombre_usuario.lower() == elemento.get("Usuario"):
-                print("ese nombre de usuario ya esta utilizado")
-                boleano=bool(0)
-        if boleano:
-            password = input("Ingrese su password de usuario\n")
-            nombre_real = input("Ingrese su nombre\n")
-            apellido = input("Ingrese su apellido\n")
-            direccion = input("Ingrese su dirrecion\n")
-            casa_de_estudio = input("Ingrese su casa de estudio\n")
-            crear_usuario(nombre_usuario, password,
-                          nombre_real, apellido,
-                          direccion, casa_de_estudio) 
+		nombre_inicio = input("Ingrese su nombre de usuario\n")
+		contra_inicio = input("ingrese su password de usuario\n")
 
-        
+		iniciar_sesion(nombre_inicio,contra_inicio,ruta_del_archivo)
+				
 
-    elif opt == 'c':
+	elif opt == 'b':
 
-        continuar = False
+		while True:
+			nombre_usuario = input("Ingrese su nombre de usuario\n")
+			if nombre_usuario.lower() in listar_usuarios(): # comprobar si el nombre de usuario ya se encuentra en la funcion con la lista cargada de datos de nombres de usuarios
+				print("Ese nombre de ususario ya existe")
+				continue # vuelve a repetir la condicion de que ingrese un nuevo nombre de usuario
+				
+			password = input("Ingrese su password de usuario\n")
+			nombre_real = input("Ingrese su nombre\n")
+			apellido = input("Ingrese su apellido\n")
+			direccion = input("Ingrese su dirrecion\n")
+			casa_de_estudio = input("Ingrese su casa de estudio\n")
+			break #sale del while true
+		crear_usuario(nombre_usuario, password,
+						  nombre_real, apellido,
+						  direccion, casa_de_estudio) 
 
-    else:
+	elif opt == 'c':
 
-        print("Opcion no valida, ingrese una de las opciones mostradas")
+		break
 
-        input("Presione enter para continuar")
+	else:
+
+		print("Opcion no valida, ingrese una de las opciones mostradas")
+
+		input("Presione enter para continuar")
 
 
