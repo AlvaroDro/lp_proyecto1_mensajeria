@@ -70,6 +70,70 @@ def crear_usuario(nombre_usuario, password,
 
     input("Usuario agregado exitosamente, presione enter para continuar")
 
+
+def vista_de_sesion(indexd):
+    cargardatos = cargar_archivo(ruta_del_archivo)
+    indice_cuenta = indexd
+    while True:
+        print("Presione 'a' para entrar a la bandeja de entrada")
+        print("Presione 'b' para redactar un mensaje")
+        print("Presione 'c' para configurar su perfil")
+        print("Presione 'd' para salir de la cuenta")
+        opt = input("Digite su opcion: ")
+
+        if opt == 'a':
+            print(cargardatos[indice_cuenta].get("Bandeja de entrada"))
+
+        elif opt == 'b':
+            print("Ingrese el destinatario")
+            mensaje_destinatario = input("Ingrese el destinatario")
+            for usuarios in cargardatos:
+                if mensaje_destinatario.lower() in usuarios["Usuario"]:
+                    indice= cargardatos.index(usuarios)
+                    mensaje_asunto = input("Ingrese el asunto (opcional)")
+                    mensaje_redactato = input("Escriba el mensaje")
+                    mensaje = {"Asunto":mensaje_asunto,"Emisor":cargardatos[indice_cuenta].get("Usuario"),"Mensaje":mensaje_redactato}
+                    cargardatos[indice]["Bandeja de entrada"].append(mensaje)
+
+                    sobrescribir_archivo(ruta_del_archivo, cargardatos)
+
+
+        elif opt == 'c':
+            while True:
+                print("Presione 'a' para configurar su password")
+                print("Presione 'b' para configurar su nombre")
+                print("Presione 'c' para configurar su apellido")
+                print("Presione 'd' para configurar su direccion")
+                print("Presione 'e' para configurar su casa de estudio")
+                print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
+                opc = input("Digite su opcion: ")
+                if opc == 'a':
+
+                    nueva_pass = input("Ingrese su nueva pass")
+                    cargardatos[indice_cuenta]["Password"] = nueva_pass.lower()
+                    sobrescribir_archivo(ruta_del_archivo,cargardatos)
+                    print("hola")
+                elif opc == 'b':
+                    print("hola")
+                elif opc == 'c':
+                    print("hola")
+                elif opc == 'd':
+                    print("hola")
+                elif opc == 'e':
+                    print("hola")
+                elif opc == 'f':
+                    print("Saliendo al menu de usuario")
+                    break
+                else:
+                    print("Opcion no valida, ingrese una de las opciones mostradas")
+
+        elif opt == 'd':
+            print("Saliendo de la cuenta...")
+            break
+                    
+        else:
+            print("Opcion no valida, ingrese una de las opciones mostradas")    
+
 def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
     """Summary
     
@@ -79,77 +143,14 @@ def iniciar_sesion(nombre_usuario, contra_usuario, archivo):
         archivo (string): Ruta donde se encuentra guardado el archivo ".json"
     """
     cargardatos = cargar_archivo(archivo)
-
-    for elemento in cargardatos:
-        if nombre_usuario == elemento.get("Usuario") and contra_usuario == elemento.get("Password"):
-
+    indice = listar_usuarios().index(nombre_usuario)
+    while True:
+        if  nombre_usuario in listar_usuarios() and cargardatos[indice]["Password"] == contra_usuario:
+            return vista_de_sesion(indice)
             print("logeo exitoso")
-            while True:
-                print("Presione 'a' para entrar a la bandeja de entrada")
-                print("Presione 'b' para redactar un mensaje")
-                print("Presione 'c' para configurar su perfil")
-                print("Presione 'd' para salir de la cuenta")
-                opt = input("Digite su opcion: ")
-
-                if opt == 'a':
-                    print(elemento.get("Bandeja de entrada"))
-
-                elif opt == 'b':
-                    mensaje_destinatario = input("Ingrese el destinatario")
-                    for usuarios in cargardatos:
-                        if mensaje_destinatario.lower() in usuarios["Usuario"]:
-                            indice = cargardatos.index(usuarios)
-                            mensaje_asunto = input("Ingrese el asunto (opcional)")
-                            mensaje_redactato = input("Escriba el mensaje")
-                            mensaje = {"Asunto":mensaje_asunto,"Emisor":elemento.get("Usuario"),"Mensaje":mensaje_redactato}
-                            cargardatos[indice]["Bandeja de entrada"].append(mensaje)
-
-                            sobrescribir_archivo(ruta_del_archivo, cargardatos)
-                            break
-
-                elif opt == 'c':
-                    while True:
-                        print("Presione 'a' para configurar su password")
-                        print("Presione 'b' para configurar su nombre")
-                        print("Presione 'c' para configurar su apellido")
-                        print("Presione 'd' para configurar su direccion")
-                        print("Presione 'e' para configurar su casa de estudio")
-                        print("Presione 'f' para salir de la configuracion y volver al menu de usuario")
-                        opc = input("Digite su opcion: ")
-                        if opc == 'a':
-
-                            nueva_pass = input("Ingrese su nueva pass")
-                            elemento["Password"] = nueva_pass.lower()
-                            sobrescribir_archivo(ruta_del_archivo,cargardatos)
-                            print("hola")
-                        elif opc == 'b':
-                            print("hola")
-                        elif opc == 'c':
-                            print("hola")
-                        elif opc == 'd':
-                            print("hola")
-                        elif opc == 'e':
-                            print("hola")
-                        elif opc == 'f':
-                	        print("Saliendo al menu de usuario")
-                	        break
-                        else:
-                            print("Opcion no valida, ingrese una de las opciones mostradas")
-
-                elif opt == 'd':
-                    print("Saliendo de la cuenta...")
-                    return bool('true')
-                    break
-                    
-                else:
-                    print("Opcion no valida, ingrese una de las opciones mostradas")
-
         else:
             print("Error de inicio de sesion, volviendo al menu principal")
-            #break
-    
-
-
+            break
 
 
 ##Main()por hacer 
@@ -170,7 +171,6 @@ while True:
         contra_inicio = input("ingrese su password de usuario\n")
 
         iniciar_sesion(nombre_inicio,contra_inicio,ruta_del_archivo)
-                
 
     elif opt == 'b':
 
