@@ -28,7 +28,6 @@
         "Nombre": "teemo",
         "Password": "tejon",
         "Usuario": "Teemo"
-<<<<<<< HEAD
     },
     {
         "Apellido": "asdasd",
@@ -147,16 +146,6 @@
         "Apellido": "asd",
         "Bandeja de entrada": [
             {
-                "Asunto": "esto es una prueba",
-                "Emisor": "asd",
-                "Mensaje": "una simple prueba"
-            },
-            {
-                "Asunto": "un asunto cualquiera",
-                "Emisor": "asd",
-                "Mensaje": "Esto es otra prueba mas"
-            },
-            {
                 "Asunto": "asd",
                 "Emisor": "asd",
                 "Mensaje": "esto es una prueba por el break"
@@ -200,7 +189,5 @@
         "Nombre": "asd",
         "Password": "hg123",
         "Usuario": "hg"
-=======
->>>>>>> 17daeff975acf2ddf359b87574a1cea43277bde7
     }
 ]
