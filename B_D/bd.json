@@ -1,63 +1,34 @@
 [
     {
-        "Apellido": "anonimo",
+        "Apellido": "Pavez",
         "Bandeja de entrada": [
             {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
+                "Asunto": "hola",
+                "Emisor": "lactunkk",
+                "Mensaje": "precioso"
             }
         ],
-        "Casa estudio": "anonimo",
-        "Dirrecion": "anonimo",
-        "Nombre": "anonimo",
-        "Password": "admin123",
-        "Usuario": "admin"
-    },
-    {
-        "Apellido": "pavez",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "ulagos",
-        "Dirrecion": "puerto",
+        "Casa estudio": "Ulagos",
+        "Dirrecion": "puerto montt",
         "Nombre": "christopher",
-        "Password": "chris",
+        "Password": "chris1",
         "Usuario": "lactunkk"
     },
     {
-        "Apellido": "lel",
+        "Apellido": "capitan",
         "Bandeja de entrada": [
             {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
+                "Asunto": "Hola",
+                "Emisor": "lactunkk",
+                "Mensaje": "tejon ctm"
             }
         ],
-        "Casa estudio": "lol",
-        "Dirrecion": "lil",
-        "Nombre": "nosellama",
-        "Password": "carlitos",
-        "Usuario": "jaime"
-    },
-    {
-        "Apellido": "del lol",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "del invocador",
-        "Dirrecion": "grieta",
-        "Nombre": "teemin",
-        "Password": "capitan",
+        "Casa estudio": "of legends",
+        "Dirrecion": "league",
+        "Nombre": "teemo",
+        "Password": "tejon",
         "Usuario": "Teemo"
+<<<<<<< HEAD
     },
     {
         "Apellido": "asdasd",
@@ -229,5 +200,7 @@
         "Nombre": "asd",
         "Password": "hg123",
         "Usuario": "hg"
+=======
+>>>>>>> 17daeff975acf2ddf359b87574a1cea43277bde7
     }
 ]
