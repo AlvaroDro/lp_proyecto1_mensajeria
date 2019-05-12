@@ -117,12 +117,19 @@ def vista_de_sesion(indice_cuenta):
                     if opcion == "a":
 
                         eliminar_mensaje = input("Ingrese el numero del mensaje a eliminar: ")
+<<<<<<< HEAD
 
                         if not eliminar_mensaje.isdigit():
                             print("Ingreso una letra y no un numero")
                             continue
                     
                         if int(eliminar_mensaje) <= 0 or int(eliminar_mensaje) > len(bandeja):
+=======
+                        if not eliminar_mensaje.isdigit():
+                            print("No es un numero")
+                            continue
+                        elif int(eliminar_mensaje) <= 0 or int(eliminar_mensaje) > len(bandeja):
+>>>>>>> 75d2855316db89df5b20e74eafc20ab36ed83f23
                             print("ingrese valores correctos para eliminar")
                             continue
                         else:
