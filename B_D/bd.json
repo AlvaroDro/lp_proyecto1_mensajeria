@@ -1,62 +1,47 @@
 [
     {
+        "Nombre": "Christopher",
         "Apellido": "Pavez",
+        "Usuario": "lactunkk",
+        "Password": "chris",
+        "Dirrecion": "Puerto montt",
+        "Casa estudio": "Ulagos",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "gracias",
+                "Emisor": "lactunkk",
+                "Mensaje": "guapeton"
+            }
+        ]
+    },
+    {
+        "Nombre": "Teemo",
+        "Apellido": "Capitan",
+        "Usuario": "Teemo",
+        "Password": "Capitan",
+        "Dirrecion": "league",
+        "Casa estudio": "Oflegends",
         "Bandeja de entrada": [
             {
                 "Asunto": "hola",
-                "Emisor": "leo",
-                "Mensaje": "hola chris"
-            }
-        ],
-        "Casa estudio": "Ulagos",
-        "Dirrecion": "puerto montt",
-        "Nombre": "christopher",
-        "Password": "chris",
-        "Usuario": "lactunkk"
-    },
-    {
-        "Apellido": "capitan",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "Hola",
                 "Emisor": "lactunkk",
                 "Mensaje": "tejon ctm"
             }
-        ],
-        "Casa estudio": "of legends",
-        "Dirrecion": "league",
-        "Nombre": "teemo",
-        "Password": "tejon",
-        "Usuario": "Teemo"
+        ]
     },
     {
-        "Apellido": "asd",
+        "Nombre": "Leo",
+        "Apellido": "Pavez",
+        "Usuario": "leo",
+        "Password": "papa",
+        "Dirrecion": "calle",
+        "Casa estudio": "Fach",
         "Bandeja de entrada": [
             {
                 "Asunto": "hola",
                 "Emisor": "lactunkk",
-                "Mensaje": "culiao"
+                "Mensaje": "paa"
             }
-        ],
-        "Casa estudio": "asd",
-        "Dirrecion": "asd",
-        "Nombre": "asd",
-        "Password": "asd",
-        "Usuario": "asd"
-    },
-    {
-        "Apellido": "pavez",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "trabajo",
-                "Emisor": "leo",
-                "Mensaje": "penquear a los cocineros qls"
-            }
-        ],
-        "Casa estudio": "fach",
-        "Dirrecion": "calle",
-        "Nombre": "leonardo",
-        "Password": "papa1",
-        "Usuario": "leo"
+        ]
     }
 ]
