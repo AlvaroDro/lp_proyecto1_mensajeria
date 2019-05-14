@@ -65,7 +65,7 @@ def crear_usuario(nombre_usuario, password,
     Toma los parametros y crea un diccionario con esos datos
     que se guardan en la variable persona , la cual es añadida
     a la lista de diccionarios del archivo JSON en la variable
-    nueva_persona  y sobrescribe el archivo con estos datos.
+    nueva_persona  y sobrescribe el archivo JSON con estos datos.
     
     Argumentos:
 
