@@ -139,7 +139,9 @@ def vista_de_sesion(indice_cuenta):
                         persona_a_responder = bandeja[int(responder_mensaje)].get("Emisor")
                         if persona_a_responder in listar_usuarios():
                             indice = listar_usuarios().index(persona_a_responder)
+
                         mensaje_asunto = input("Ingrese el asunto (opcional): ")
+
                         mensaje_redactato = input("Escriba el mensaje: ")
                         mensaje = {"Asunto":mensaje_asunto,"Emisor":cargar_datos[indice_cuenta].get("Usuario"),"Mensaje":mensaje_redactato}
                         cargar_datos[indice]["Bandeja de entrada"].append(mensaje)
@@ -185,7 +187,7 @@ def vista_de_sesion(indice_cuenta):
                 if opcion == 'a':
                     while True:
                         nueva_pass = input("Ingrese su nueva password: ")
-                        nueva_pass_confirmacion = input("Ingrese nuevamente la password a cambiar: ")
+                        nueva_pass_confirmacion = input("Ingrese nuevamente"+                      " la password a cambiar: ")
                         if nueva_pass != nueva_pass_confirmacion:
                             print("No son iguales las password")
                             continue
@@ -225,7 +227,7 @@ def vista_de_sesion(indice_cuenta):
 
                 elif opcion == 'e':
 
-                    nueva_casa_de_estudio = input("Ingrese su nueva casa de estudio: ")
+                    nueva_casa_de_estudio = input("Ingrese su nueva casa de"+" estudio: ")
                     cargar_datos[indice_cuenta]["Casa estudio"] = nueva_casa_de_estudio.lower()
                     sobrescribir_archivo(ruta_del_archivo,cargar_datos)
                     print("Cambio de casa de estudio realizada")
@@ -235,7 +237,8 @@ def vista_de_sesion(indice_cuenta):
                     print("Saliendo al menu de usuario")
                     break
                 else:
-                    print("Opcion no valida, ingrese una de las opciones mostradas")
+                    print("Opcion no valida, ingrese una de las opciones"+
+                        " mostradas")
 
         elif opcion == 'd':
             print("Saliendo de la cuenta...")
@@ -287,7 +290,9 @@ def main():
             nombre_inicio = input("Ingrese su nombre de usuario\n")
             contra_inicio = input("ingrese su password de usuario\n")
 
-            iniciar_sesion(nombre_inicio,contra_inicio,ruta_del_archivo)
+            iniciar_sesion(nombre_inicio,
+                        contra_inicio,
+                        ruta_del_archivo)
 
         elif opcion == 'b':
 
@@ -301,7 +306,8 @@ def main():
                     continue
                 while True:    
                     password = input("Ingrese su password de usuario\n")
-                    password_confirmacion = input("Ingrese nuevamente su password de usuario\n")
+                    password_confirmacion = input("Ingrese nuevamente su "+
+                        "password de usuario\n")
                     if password != password_confirmacion:
                         print("No son iguales las password")
                         continue

@@ -1,130 +1,5 @@
 [
     {
-        "Apellido": "Pavez",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "hola",
-                "Emisor": "lactunkk",
-                "Mensaje": "precioso"
-            }
-        ],
-        "Casa estudio": "Ulagos",
-        "Dirrecion": "puerto montt",
-        "Nombre": "christopher",
-        "Password": "chris1",
-        "Usuario": "lactunkk"
-    },
-    {
-        "Apellido": "capitan",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "Hola",
-                "Emisor": "lactunkk",
-                "Mensaje": "tejon ctm"
-            }
-        ],
-        "Casa estudio": "of legends",
-        "Dirrecion": "league",
-        "Nombre": "teemo",
-        "Password": "tejon",
-        "Usuario": "Teemo"
-    },
-    {
-        "Apellido": "asdasd",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            },
-            {
-                "Asunto": "Respuesta al pago",
-                "Emisor": "gust",
-                "Mensaje": "Esta es la respuesta que estabas esperando te subimos el sueldo a $2clp"
-            }
-        ],
-        "Casa estudio": "asd",
-        "Dirrecion": "asd",
-        "Nombre": "asd",
-        "Password": "asd",
-        "Usuario": "asd"
-    },
-    {
-        "Apellido": "d",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "asd",
-        "Dirrecion": "s",
-        "Nombre": "g",
-        "Password": "c",
-        "Usuario": "c"
-    },
-    {
-        "Apellido": "asd",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "asd",
-        "Dirrecion": "asd",
-        "Nombre": "asd",
-        "Password": "asd",
-        "Usuario": "asd"
-    },
-    {
-        "Apellido": "qwe",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "qwe",
-        "Dirrecion": "asd",
-        "Nombre": "asd",
-        "Password": "asdqwe",
-        "Usuario": "asd"
-    },
-    {
-        "Apellido": "asd",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "asd",
-        "Dirrecion": "asd",
-        "Nombre": "asd",
-        "Password": "asd",
-        "Usuario": "asd"
-    },
-    {
-        "Apellido": "wqe",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Fuente": "",
-                "Mensaje": ""
-            }
-        ],
-        "Casa estudio": "wqe",
-        "Dirrecion": "qwe",
-        "Nombre": "rwq",
-        "Password": "qwe",
-        "Usuario": "asd"
-    },
-    {
         "Apellido": "berserkertherial",
         "Bandeja de entrada": [],
         "Casa estudio": "la calle",
@@ -135,7 +10,13 @@
     },
     {
         "Apellido": "asdqwe",
-        "Bandeja de entrada": [],
+        "Bandeja de entrada": [
+            {
+                "Asunto": "",
+                "Emisor": "asd",
+                "Mensaje": "jajasjk"
+            }
+        ],
         "Casa estudio": "ssss",
         "Dirrecion": "asdqw",
         "Nombre": "asdqwe",
@@ -174,7 +55,13 @@
     },
     {
         "Apellido": "sss",
-        "Bandeja de entrada": [],
+        "Bandeja de entrada": [
+            {
+                "Asunto": "asd",
+                "Emisor": "asd",
+                "Mensaje": "asdasd"
+            }
+        ],
         "Casa estudio": "ss",
         "Dirrecion": "sss",
         "Nombre": "asd",
@@ -189,5 +76,14 @@
         "Nombre": "asd",
         "Password": "hg123",
         "Usuario": "hg"
+    },
+    {
+        "Apellido": "llama",
+        "Bandeja de entrada": [],
+        "Casa estudio": "asd",
+        "Dirrecion": "la calle",
+        "Nombre": "nose",
+        "Password": "asd",
+        "Usuario": "asd"
     }
 ]
