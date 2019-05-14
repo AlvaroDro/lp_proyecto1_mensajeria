@@ -1,146 +1,35 @@
 [
     {
-<<<<<<< HEAD
-        "Apellido": "berserkertherial",
-        "Bandeja de entrada": [],
+        "Bandeja de entrada": [
+            {
+                "Mensaje": "asd",
+                "Emisor": "asd",
+                "Asunto": "asd"
+            }
+        ],
+        "Dirrecion": "la street",
         "Casa estudio": "la calle",
-        "Dirrecion": "las condes",
-        "Nombre": "gutsavo",
-        "Password": "",
-        "Usuario": ""
-    },
-    {
-        "Apellido": "asdqwe",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "",
-                "Emisor": "asd",
-                "Mensaje": "jajasjk"
-            }
-        ],
-        "Casa estudio": "ssss",
-        "Dirrecion": "asdqw",
-        "Nombre": "asdqwe",
-        "Password": "asdqw",
-        "Usuario": "asdqw"
-=======
-        "Apellido": "Pavez",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "hola",
-                "Emisor": "leo",
-                "Mensaje": "hola chris"
-            }
-        ],
-        "Casa estudio": "Ulagos",
-        "Dirrecion": "puerto montt",
-        "Nombre": "christopher",
-        "Password": "chris",
-        "Usuario": "lactunkk"
-    },
-    {
-        "Apellido": "capitan",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "Hola",
-                "Emisor": "lactunkk",
-                "Mensaje": "tejon ctm"
-            }
-        ],
-        "Casa estudio": "of legends",
-        "Dirrecion": "league",
-        "Nombre": "teemo",
-        "Password": "tejon",
-        "Usuario": "Teemo"
->>>>>>> b7c8e4fdcfa54c1d379aba8a0d43396ccd71945d
-    },
-    {
-        "Apellido": "asd",
-        "Bandeja de entrada": [
-            {
-<<<<<<< HEAD
-                "Asunto": "asd",
-                "Emisor": "asd",
-                "Mensaje": "esto es una prueba por el break"
-            },
-            {
-                "Asunto": "asd",
-                "Emisor": "asd",
-                "Mensaje": "prueba"
-            },
-            {
-                "Asunto": "asd",
-                "Emisor": "asd",
-                "Mensaje": "Esta en una prueba de la nueva funcion"
-            },
-            {
-                "Asunto": "asd",
-                "Emisor": "asd",
-                "Mensaje": "asd"
-=======
-                "Asunto": "hola",
-                "Emisor": "lactunkk",
-                "Mensaje": "culiao"
->>>>>>> b7c8e4fdcfa54c1d379aba8a0d43396ccd71945d
-            }
-        ],
-        "Casa estudio": "asd",
-        "Dirrecion": "asd",
+        "Password": "asd",
+        "Apellido": "algoasd",
         "Nombre": "asd",
-<<<<<<< HEAD
+        "Usuario": "asd"
+    },
+    {
+        "Bandeja de entrada": [],
+        "Dirrecion": "inframundo",
+        "Casa estudio": "la banda del alcon",
         "Password": "gust123",
+        "Apellido": "berserk",
+        "Nombre": "guts",
         "Usuario": "gust"
     },
     {
-        "Apellido": "sss",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "asd",
-                "Emisor": "asd",
-                "Mensaje": "asdasd"
-            }
-        ],
-        "Casa estudio": "ss",
-        "Dirrecion": "sss",
-        "Nombre": "asd",
-        "Password": "d",
-        "Usuario": "asdqwe"
-    },
-    {
-        "Apellido": "asd",
         "Bandeja de entrada": [],
-        "Casa estudio": "asd",
-        "Dirrecion": "asd",
-        "Nombre": "asd",
-        "Password": "hg123",
-        "Usuario": "hg"
-    },
-    {
-        "Apellido": "llama",
-        "Bandeja de entrada": [],
-        "Casa estudio": "asd",
-        "Dirrecion": "la calle",
-        "Nombre": "nose",
-        "Password": "asd",
-        "Usuario": "asd"
-=======
-        "Password": "asd",
-        "Usuario": "asd"
-    },
-    {
-        "Apellido": "pavez",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "trabajo",
-                "Emisor": "leo",
-                "Mensaje": "penquear a los cocineros qls"
-            }
-        ],
-        "Casa estudio": "fach",
-        "Dirrecion": "calle",
-        "Nombre": "leonardo",
-        "Password": "papa1",
-        "Usuario": "leo"
->>>>>>> b7c8e4fdcfa54c1d379aba8a0d43396ccd71945d
+        "Usuario": "ASD1",
+        "Casa estudio": "Asd",
+        "Password": "asd123",
+        "Apellido": "Asd",
+        "Nombre": "Asd",
+        "Dirrecion": "asd"
     }
 ]
