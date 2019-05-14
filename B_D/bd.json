@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "Apellido": "berserkertherial",
         "Bandeja de entrada": [],
         "Casa estudio": "la calle",
@@ -22,11 +23,42 @@
         "Nombre": "asdqwe",
         "Password": "asdqw",
         "Usuario": "asdqw"
+=======
+        "Apellido": "Pavez",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "hola",
+                "Emisor": "leo",
+                "Mensaje": "hola chris"
+            }
+        ],
+        "Casa estudio": "Ulagos",
+        "Dirrecion": "puerto montt",
+        "Nombre": "christopher",
+        "Password": "chris",
+        "Usuario": "lactunkk"
+    },
+    {
+        "Apellido": "capitan",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "Hola",
+                "Emisor": "lactunkk",
+                "Mensaje": "tejon ctm"
+            }
+        ],
+        "Casa estudio": "of legends",
+        "Dirrecion": "league",
+        "Nombre": "teemo",
+        "Password": "tejon",
+        "Usuario": "Teemo"
+>>>>>>> b7c8e4fdcfa54c1d379aba8a0d43396ccd71945d
     },
     {
         "Apellido": "asd",
         "Bandeja de entrada": [
             {
+<<<<<<< HEAD
                 "Asunto": "asd",
                 "Emisor": "asd",
                 "Mensaje": "esto es una prueba por el break"
@@ -45,11 +77,17 @@
                 "Asunto": "asd",
                 "Emisor": "asd",
                 "Mensaje": "asd"
+=======
+                "Asunto": "hola",
+                "Emisor": "lactunkk",
+                "Mensaje": "culiao"
+>>>>>>> b7c8e4fdcfa54c1d379aba8a0d43396ccd71945d
             }
         ],
         "Casa estudio": "asd",
         "Dirrecion": "asd",
         "Nombre": "asd",
+<<<<<<< HEAD
         "Password": "gust123",
         "Usuario": "gust"
     },
@@ -85,5 +123,24 @@
         "Nombre": "nose",
         "Password": "asd",
         "Usuario": "asd"
+=======
+        "Password": "asd",
+        "Usuario": "asd"
+    },
+    {
+        "Apellido": "pavez",
+        "Bandeja de entrada": [
+            {
+                "Asunto": "trabajo",
+                "Emisor": "leo",
+                "Mensaje": "penquear a los cocineros qls"
+            }
+        ],
+        "Casa estudio": "fach",
+        "Dirrecion": "calle",
+        "Nombre": "leonardo",
+        "Password": "papa1",
+        "Usuario": "leo"
+>>>>>>> b7c8e4fdcfa54c1d379aba8a0d43396ccd71945d
     }
 ]
