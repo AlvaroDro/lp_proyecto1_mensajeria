@@ -35,10 +35,9 @@ def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
     Argumentos:
         ruta (String): Ruta donde se encuentra guardado el archivo
         JSON.
-
+    
         diccionario_con_datos_nuevos (dict): Diccionario que tiene
         datos nuevos para ser agregados al archivo JSON.
-
     """
 
     with open(ruta, 'w') as archivo:
@@ -108,7 +107,7 @@ def vista_de_sesion(indice_cuenta):
     c) Configurar perfil: Opcion para cambiar la informacion
         de la cuenta del usuario.
 
-    d) salir de la cuenta.
+    d) Salir de la cuenta.
 
     Argumentos:
         indice_cuenta (String): indice del nombre de usuario con el que
@@ -160,7 +159,8 @@ def vista_de_sesion(indice_cuenta):
 
                     if opcion == "a":
 
-                        eliminar_mensaje = input("Ingrese el numero del"+" mensaje a eliminar: ")
+                        eliminar_mensaje = input("Ingrese el numero del"+
+                                            " mensaje a eliminar: ")
 
                         if not eliminar_mensaje.isdigit():
                             print("ingrese valores correctos para eliminar")
@@ -198,9 +198,7 @@ def vista_de_sesion(indice_cuenta):
                             continue
 
                         responder_mensaje = int(responder_mensaje) - 1
-                        persona_a_responder = bandeja[
-                                                      int(responder_mensaje)
-                                                     ].get("Emisor")
+                        persona_a_responder = bandeja[responder_mensaje].get("Emisor")
 
                         if persona_a_responder in listar_usuarios():
                             indice = listar_usuarios().index(
@@ -274,7 +272,8 @@ def vista_de_sesion(indice_cuenta):
                     while True:
 
                         nueva_pass = input("Ingrese su nueva password: ")
-                        nueva_pass_confirmacion = input("Ingrese nuevamente"+                      " la password a cambiar: ")
+                        nueva_pass_confirmacion = input("Ingrese nuevamente"+
+                            " la password a cambiar: ")
 
 
                         if nueva_pass != nueva_pass_confirmacion:
