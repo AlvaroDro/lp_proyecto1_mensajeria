@@ -1,6 +1,5 @@
 [
     {
-<<<<<<< HEAD
         "Nombre": "Christopher",
         "Apellido": "Pavez",
         "Usuario": "lactunkk",
@@ -27,6 +26,11 @@
                 "Asunto": "hola",
                 "Emisor": "lactunkk",
                 "Mensaje": "tejon ctm"
+            },
+            {
+                "Asunto": "chupa",
+                "Emisor": "lactunkk",
+                "Mensaje": "elpico"
             }
         ]
     },
@@ -44,38 +48,5 @@
                 "Mensaje": "paa"
             }
         ]
-=======
-        "Bandeja de entrada": [
-            {
-                "Mensaje": "asd",
-                "Emisor": "asd",
-                "Asunto": "asd"
-            }
-        ],
-        "Dirrecion": "la street",
-        "Casa estudio": "la calle",
-        "Password": "asd",
-        "Apellido": "algoasd",
-        "Nombre": "asd",
-        "Usuario": "asd"
-    },
-    {
-        "Bandeja de entrada": [],
-        "Dirrecion": "inframundo",
-        "Casa estudio": "la banda del alcon",
-        "Password": "gust123",
-        "Apellido": "berserk",
-        "Nombre": "guts",
-        "Usuario": "gust"
-    },
-    {
-        "Bandeja de entrada": [],
-        "Usuario": "ASD1",
-        "Casa estudio": "Asd",
-        "Password": "asd123",
-        "Apellido": "Asd",
-        "Nombre": "Asd",
-        "Dirrecion": "asd"
->>>>>>> 2f5513a45fb4303b9e68cddeb127dbbd8da72a49
     }
 ]

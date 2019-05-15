@@ -13,6 +13,7 @@ def cargar_archivo(ruta):
     Retorna:
         lista: Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.
+
     """ 
     if len(ruta) != 0:
         with open(ruta) as archivo:
@@ -34,17 +35,20 @@ def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
         JSON.
         diccionario_con_datos_nuevos (dict): Diccionario que tiene
         datos nuevos para ser agregados al archivo JSON.
+
     """
 
     with open(ruta, 'w') as archivo:
         json.dump(diccionario_con_datos_nuevos, archivo, indent=4)
 
 def listar_usuarios():
-    """Crea una lista con todos los nombres de usuarios dentro del
+    """
+    Crea una lista con todos los nombres de usuarios dentro del
     archivo JSON. 
     Retorna:
         lista: Retorna una lista con todos los nombres de usuarios
         que estén en el archivo JSON.
+
     """
     lista_usuarios = []
     for elementos in cargar_archivo(ruta_del_archivo):
@@ -67,6 +71,7 @@ def crear_usuario(nombre_usuario, password,
         apellido (String): Apellido de la persona.
         direccion (String): Dirección de la persona.
         universidad (String): Casa de estudio de la persona.
+
     """
     persona = {
                 "Nombre":nombre,
@@ -86,19 +91,26 @@ def crear_usuario(nombre_usuario, password,
 
 
 def vista_de_sesion(indice_cuenta):
-    """Muestra todas las opciones para la cuenta que inicio sesión
+    """
+    Muestra todas las opciones para la cuenta que inicio sesión
     utilizando su índice como referencia, las opciones que se despliegan
     son las siguientes:  
+
     a) Bandeja de entrada: Opción para visualizar los mensajes 
         recibidos, los cuales puede responder o eliminar.
+
     b) Redactar un mensaje: Envió de mensajes a los usuarios
         de la aplicación.
+
     c) Configurar perfil: Opción para cambiar la información
         de la cuenta del usuario.
-    d) salir de la cuenta.
+
+    d) Salir de la cuenta y volver al menu principal.
+
     Argumentos:
         indice_cuenta (String): índice del nombre de usuario con el que
                                 inicio sesión.
+
     """
     cargar_datos = cargar_archivo(ruta_del_archivo)
     while True:
@@ -151,7 +163,7 @@ def vista_de_sesion(indice_cuenta):
                         if not eliminar_mensaje.isdigit():
                             print("ingrese valores correctos para eliminar")
                             continue
-
+                        
                         elif (int(eliminar_mensaje) <= 0 or 
                              int(eliminar_mensaje) > len(bandeja)):
 
@@ -160,8 +172,8 @@ def vista_de_sesion(indice_cuenta):
 
                         else:
                             eliminar_mensaje = int(eliminar_mensaje) - 1
-                            cargar_datos[indice_cuenta]["Bandeja de"+
-                            " entrada"].pop(int(eliminar_mensaje))
+                            cargar_datos[indice_cuenta][
+                            "Bandeja de entrada"].pop(int(eliminar_mensaje))
 
                             print("Mensaje eliminado correctamente")
                             sobrescribir_archivo(ruta_del_archivo,
@@ -184,13 +196,10 @@ def vista_de_sesion(indice_cuenta):
                             continue
 
                         responder_mensaje = int(responder_mensaje) - 1
-                        persona_a_responder = bandeja[
-                                                      int(responder_mensaje)
-                                                     ].get("Emisor")
+                        remitente = bandeja[responder_mensaje].get("Emisor")
 
-                        if persona_a_responder in listar_usuarios():
-                            indice = listar_usuarios().index(
-                                                         persona_a_responder)
+                        if remitente in listar_usuarios():
+                            indice = listar_usuarios().index(remitente)
                         mensaje_asunto = input("Ingrese el asunto "+
                             "(opcional): ")
 
@@ -315,7 +324,7 @@ def vista_de_sesion(indice_cuenta):
 
                     nueva_dirreccion = input("Ingrese su nueva dirección: ")
                     cargar_datos[indice_cuenta][
-                                                    "Dirrecion"
+                                                "Dirrecion"
                                                ] = nueva_dirreccion
                     sobrescribir_archivo(ruta_del_archivo,cargar_datos)
                     print("Cambio de dirección realizada")
@@ -326,9 +335,9 @@ def vista_de_sesion(indice_cuenta):
                     nueva_casa_de_estudio = input("Ingrese su nueva casa de"+
                         " estudio: ")
                     cargar_datos[
-                                    indice_cuenta
+                                indice_cuenta
                                 ][
-                                    "Casa estudio"
+                                "Casa estudio"
                                 ] = nueva_casa_de_estudio.capitalize()
 
 
@@ -367,6 +376,7 @@ def iniciar_sesion(nombre_usuario,
         contra_usuario (String): Contraseña del usuario.
         archivo (String): Ruta donde se encuentra guardado el archivo 
         JSON.
+
     """
     cargar_datos = cargar_archivo(archivo)
 
@@ -391,6 +401,7 @@ def main():
     """
     Menú principal en el cual se maneja todo el programa, obteniendo
     los datos del usuario o el registro de este.
+
     """
     while True:
 
