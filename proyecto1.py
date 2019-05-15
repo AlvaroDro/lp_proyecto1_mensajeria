@@ -7,13 +7,11 @@ def cargar_archivo(ruta):
     """
     Carga todos los datos del archivo JSON en la variable contenido 
     y esta es retornada.
-
-
     Argumentos:
-        ruta (string): Ruta donde se encuentra guardado el archivo JSON
+        ruta (String): Ruta donde se encuentra guardado el archivo JSON
     
     Retorna:
-        list: Retorna una lista de diccionarios con los datos que 
+        lista: Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.
 
     """ 
@@ -30,12 +28,15 @@ def cargar_archivo(ruta):
 def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
     """
     Abre el archivo JSON y sobrescribe el archivo con 
-    los datos del diccionario que se le entrega como parametro.
+    los datos del diccionario que se le entrega como parámetro.
     
     Argumentos:
         ruta (String): Ruta donde se encuentra guardado el archivo
         JSON.
+<<<<<<< HEAD
     
+=======
+>>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
         diccionario_con_datos_nuevos (dict): Diccionario que tiene
         datos nuevos para ser agregados al archivo JSON.
     """
@@ -44,12 +45,12 @@ def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
         json.dump(diccionario_con_datos_nuevos, archivo, indent=4)
 
 def listar_usuarios():
-    """Crea una lista con todos los nombres de usuarios dentro del
+    """
+    Crea una lista con todos los nombres de usuarios dentro del
     archivo JSON. 
-
     Retorna:
-        list: Retorna una lista con todos los nombres de usuarios
-        que esten en el archivo JSON.
+        lista: Retorna una lista con todos los nombres de usuarios
+        que estén en el archivo JSON.
 
     """
     lista_usuarios = []
@@ -61,13 +62,16 @@ def crear_usuario(nombre_usuario, password,
                   nombre, apellido,
                   direccion, universidad):
     """
-    Toma los parametros y crea un diccionario con esos datos
-    que se guardan en la variable persona , la cual es añadida
+    Toma los parámetros y crea un diccionario con esos datos
+    que se guardan en la variable persona, la cual es añadida
     a la lista de diccionarios del archivo JSON en la variable
+<<<<<<< HEAD
     nueva_persona  y sobrescribe el archivo JSON con estos datos.
+=======
+    nueva_persona y sobrescribe el archivo con estos datos.
+>>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
     
     Argumentos:
-
         nombre_usuario (String): Nombre de usuario de la persona.
         password (String): Contraseña de la persona.
         nombre (String): Nombre real de la persona.
@@ -82,36 +86,41 @@ def crear_usuario(nombre_usuario, password,
                 "Usuario":nombre_usuario,
                 "Password":password,
                 "Dirrecion":direccion,
-                "Casa estudio":universidad,               
+                "Casa estudio":universidad,
                 "Bandeja de entrada":[] 
                 }                       
-                						
+
     nueva_persona = cargar_archivo(ruta_del_archivo)
     nueva_persona.append(persona)
     sobrescribir_archivo(ruta_del_archivo, nueva_persona)
 
-    print("Usuario agregado exitosamente, presione enter para continuar")
+    print("Usuario agregado exitosamente, presione Enter para continuar")
 
 
 def vista_de_sesion(indice_cuenta):
-    """Muestra todas las opciones para la cuenta que inicio sesion
-    utilizando su indice como referncia, las opciones que se despligan
+    """
+    Muestra todas las opciones para la cuenta que inicio sesión
+    utilizando su índice como referencia, las opciones que se despliegan
     son las siguientes:  
 
-    a) Bandeja de entrada: Opcion para visualizar los mensajes 
+    a) Bandeja de entrada: Opción para visualizar los mensajes 
         recibidos, los cuales puede responder o eliminar.
 
-    b) Redactar un mensaje: Envio de mensajes a los usuarios
-        de la aplicacion.
+    b) Redactar un mensaje: Envió de mensajes a los usuarios
+        de la aplicación.
 
-    c) Configurar perfil: Opcion para cambiar la informacion
+    c) Configurar perfil: Opción para cambiar la información
         de la cuenta del usuario.
 
+<<<<<<< HEAD
     d) Salir de la cuenta.
+=======
+    d) Salir de la cuenta y volver al menu principal.
+>>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
     Argumentos:
-        indice_cuenta (String): indice del nombre de usuario con el que
-                                inicio sesion.
+        indice_cuenta (String): índice del nombre de usuario con el que
+                                inicio sesión.
 
     """
     cargar_datos = cargar_archivo(ruta_del_archivo)
@@ -120,7 +129,7 @@ def vista_de_sesion(indice_cuenta):
         print("Presione 'b' para redactar un mensaje")
         print("Presione 'c' para configurar su perfil") 
         print("Presione 'd' para salir de la cuenta")
-        opcion = input("Digite su opcion: ")
+        opcion = input("Digite su opción: ").lower()
 
         if opcion == 'a':
             bandeja = cargar_datos[indice_cuenta].get("Bandeja de entrada")
@@ -128,7 +137,7 @@ def vista_de_sesion(indice_cuenta):
             while True:
                 if len(bandeja) == 0:
                     print(
-                        "No tiene, ningun nuevo mensaje, volviendo al menu "+
+                        "No tiene, ningún nuevo mensaje, volviendo al menú "+
                         "de usuario...")
                     break
 
@@ -139,11 +148,11 @@ def vista_de_sesion(indice_cuenta):
 
                     for elementos in bandeja:
 
-                    	print("Mensaje nº",i,"\nFuente: "+elementos.get(
-                    		"Emisor")+"\tAsunto: "+elementos.get("Asunto"),
-                    	"\n\nMensaje:\n"+elementos.get("Mensaje")+"\n")
+                        print("Mensaje nº",i,"\nFuente: "+elementos.get(
+                            "Emisor")+"\tAsunto: "+elementos.get("Asunto"),
+                        "\n\nMensaje:\n"+elementos.get("Mensaje")+"\n")
 
-                    	i=i+1
+                        i = i + 1 
 
                     break
 
@@ -153,19 +162,24 @@ def vista_de_sesion(indice_cuenta):
 
                     print("a.-Eliminar mensaje")
                     print("b.-Responder")
-                    print("c.-Salir al menu de usuario")
+                    print("c.-Salir al menú de usuario")
                     opcion = input("")
                     opcion = opcion.lower()
 
                     if opcion == "a":
 
+<<<<<<< HEAD
                         eliminar_mensaje = input("Ingrese el numero del"+
                                             " mensaje a eliminar: ")
+=======
+                        eliminar_mensaje = input("Ingrese el número del"
+                            +" mensaje a eliminar: ")
+>>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
                         if not eliminar_mensaje.isdigit():
                             print("ingrese valores correctos para eliminar")
                             continue
-
+                        
                         elif (int(eliminar_mensaje) <= 0 or 
                              int(eliminar_mensaje) > len(bandeja)):
 
@@ -174,17 +188,17 @@ def vista_de_sesion(indice_cuenta):
 
                         else:
                             eliminar_mensaje = int(eliminar_mensaje) - 1
-                            cargar_datos[indice_cuenta]["Bandeja de"+
-                            " entrada"].pop(int(eliminar_mensaje))
+                            cargar_datos[indice_cuenta][
+                            "Bandeja de entrada"].pop(int(eliminar_mensaje))
 
                             print("Mensaje eliminado correctamente")
                             sobrescribir_archivo(ruta_del_archivo,
-                            					 cargar_datos)   
+                                                 cargar_datos)   
 
                     elif opcion =="b":
 
-                        responder_mensaje = input("Ingrese el numero del "+
-                        	"mensaje a responder: ")
+                        responder_mensaje = input("Ingrese el número del "+
+                            "mensaje a responder: ")
                         if not responder_mensaje.isdigit():
                             print("ingrese valores correctos para responder"+
                             " un mensaje")
@@ -198,13 +212,16 @@ def vista_de_sesion(indice_cuenta):
                             continue
 
                         responder_mensaje = int(responder_mensaje) - 1
+<<<<<<< HEAD
                         persona_a_responder = bandeja[responder_mensaje].get("Emisor")
+=======
+                        remitente = bandeja[responder_mensaje].get("Emisor")
+>>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
-                        if persona_a_responder in listar_usuarios():
-                            indice = listar_usuarios().index(
-                        	                             persona_a_responder)
+                        if remitente in listar_usuarios():
+                            indice = listar_usuarios().index(remitente)
                         mensaje_asunto = input("Ingrese el asunto "+
-                        	"(opcional): ")
+                            "(opcional): ")
 
                         mensaje_redactato = input("Escriba el mensaje: ")
                         mensaje = {"Asunto":mensaje_asunto,
@@ -213,7 +230,8 @@ def vista_de_sesion(indice_cuenta):
                                                          ].get("Usuario"),
                                     "Mensaje":mensaje_redactato
                                   }
-                        cargar_datos[indice]["Bandeja de entrada"].append(mensaje)
+                        cargar_datos[indice][
+                                        "Bandeja de entrada"].append(mensaje)
                         sobrescribir_archivo(ruta_del_archivo, cargar_datos)
                     elif opcion == "c":
                         break
@@ -234,11 +252,12 @@ def vista_de_sesion(indice_cuenta):
 
                 for usuarios in cargar_datos:
 
-                    if mensaje_destinatario in usuarios["Usuario"]:
+                    if mensaje_destinatario.lower() in usuarios[
+                                                       "Usuario"].lower():
 
                         indice = cargar_datos.index(usuarios)
                         mensaje_asunto = input("Ingrese el asunto "+
-                        	"(opcional): ")
+                            "(opcional): ")
                         mensaje_redactato = input("Escriba el mensaje: ")
                         mensaje = {"Asunto":mensaje_asunto,
                                    "Emisor":cargar_datos[
@@ -247,11 +266,11 @@ def vista_de_sesion(indice_cuenta):
                                    "Mensaje":mensaje_redactato
                                    }
                         cargar_datos[indice]["Bandeja de entrada"].append(
-                        	mensaje)
+                            mensaje)
 
-                        sobrescribir_archivo(ruta_del_archivo, cargar_datos)  
+                        sobrescribir_archivo(ruta_del_archivo, cargar_datos) 
             else:
-                print("Destinatario no existente, volviendo al menu de"+
+                print("Destinatario no existente, volviendo al menú de"+
                 " usuario...")
 
 
@@ -261,19 +280,23 @@ def vista_de_sesion(indice_cuenta):
                 print("Presione 'a' para configurar su password")
                 print("Presione 'b' para configurar su nombre")
                 print("Presione 'c' para configurar su apellido")
-                print("Presione 'd' para configurar su direccion")
+                print("Presione 'd' para configurar su dirección")
                 print("Presione 'e' para configurar su casa de "+
-                	"estudio")
-                print("Presione 'f' para salir de la configuracion "+
-                	"y volver al menu de usuario")
-                opcion = input("Digite su opcion: ")
+                    "estudio")
+                print("Presione 'f' para salir de la configuración "+
+                    "y volver al menú de usuario")
+                opcion = input("Digite su opción: ").lower()
 
                 if opcion == 'a':
                     while True:
 
                         nueva_pass = input("Ingrese su nueva password: ")
                         nueva_pass_confirmacion = input("Ingrese nuevamente"+
+<<<<<<< HEAD
                             " la password a cambiar: ")
+=======
+                        " la password a cambiar: ")
+>>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
 
                         if nueva_pass != nueva_pass_confirmacion:
@@ -302,7 +325,7 @@ def vista_de_sesion(indice_cuenta):
                                                 "Nombre"
                                                 ] = nuevo_nombre.capitalize()
                     sobrescribir_archivo(ruta_del_archivo,cargar_datos)
-                    print("Cambio de nombre realizada")                             
+                    print("Cambio de nombre realizada")
 
                 elif opcion == 'c':
                     while True:
@@ -323,21 +346,22 @@ def vista_de_sesion(indice_cuenta):
 
                 elif opcion == 'd':
 
-                    nueva_dirreccion = input("Ingrese su nueva dirrecion: ")
+                    nueva_dirreccion = input("Ingrese su nueva dirección: ")
                     cargar_datos[indice_cuenta][
-                                                    "Dirrecion"
+                                                "Dirrecion"
                                                ] = nueva_dirreccion
                     sobrescribir_archivo(ruta_del_archivo,cargar_datos)
-                    print("Cambio de direccion realizada")
+                    print("Cambio de dirección realizada")
 
                 elif opcion == 'e':
 
 
-                    nueva_casa_de_estudio = input("Ingrese su nueva casa de"+" estudio: ")
+                    nueva_casa_de_estudio = input("Ingrese su nueva casa de"+
+                        " estudio: ")
                     cargar_datos[
-                                    indice_cuenta
+                                indice_cuenta
                                 ][
-                                    "Casa estudio"
+                                "Casa estudio"
                                 ] = nueva_casa_de_estudio.capitalize()
 
 
@@ -346,12 +370,12 @@ def vista_de_sesion(indice_cuenta):
 
                 elif opcion == 'f':
 
-                    print("Saliendo al menu de usuario...")
+                    print("Saliendo al menú de usuario...")
                     break
 
                 else:
 
-                    print("Opcion no valida, ingrese una de las opciones"+
+                    print("Opción no valida, ingrese una de las opciones"+
                         " mostradas")
 
 
@@ -360,7 +384,7 @@ def vista_de_sesion(indice_cuenta):
             break
                 
         else:
-            print("Opcion no valida, ingrese una de las opciones mostradas")
+            print("Opción no valida, ingrese una de las opciones mostradas")
 
 
 def iniciar_sesion(nombre_usuario, 
@@ -368,8 +392,8 @@ def iniciar_sesion(nombre_usuario,
                    archivo):
     """
     Comprueba que el nombre y contraseña del usuario sean las
-    correspondientes y le pasa el indice del usuario que esta 
-    iniciando sesion  a la funcion vista_de_sesion. 
+    correspondientes y le pasa el índice del usuario que esta 
+    iniciando sesión a la función vista_de_sesion. 
     
     Argumentos:
         nombre_usuario (String): Nombre del usuario.
@@ -384,34 +408,34 @@ def iniciar_sesion(nombre_usuario,
         if  nombre_usuario in listar_usuarios():
             indice = listar_usuarios().index(nombre_usuario)
             if  cargar_datos[indice]["Password"] == contra_usuario:
-                print("Inicio de sesion exitosamente")
+                print("Inicio de sesión exitosamente")
 
                 return vista_de_sesion(indice)
             else:
-                print("Error de inicio de sesion, volviendo al menu"+
+                print("Error de inicio de sesión, volviendo al menú"+
                 " principal...")
                 break
         else:
-            print("Error de inicio de sesion, volviendo al menu "+          
+            print("Error de inicio de sesión, volviendo al menú "+
                 "principal...")
             break
 
 
 def main():
     """
-    Menu principal en el cual se maneja todo el programa, obteniendo
-    los datos del usuario.
+    Menú principal en el cual se maneja todo el programa, obteniendo
+    los datos del usuario o el registro de este.
 
     """
     while True:
 
-        print("Bienvenido al servicio de mensajeria")
-        print("Presione 'a' si quiere iniciar sesion")
+        print("Bienvenido al servicio de mensajería")
+        print("Presione 'a' si quiere iniciar sesión")
         print("Presione 'b' si quiere crear una nueva cuenta")
         print("Presione 'c' si quiere salir del servicio "+
-        	"de mensajeria")
+            "de mensajería")
 
-        opcion = input("Digite su opcion: ")
+        opcion = input("Digite su opción: ").lower()
 
 
         if opcion == 'a':       
@@ -430,7 +454,7 @@ def main():
                 nombre_usuario = input("Ingrese su nombre de usuario\n")
 
                 if nombre_usuario.lower() in lista:
-                    print("Ese nombre de ususario ya existe")
+                    print("Ese nombre de usuario ya existe")
                     continue
 
                 while True:    
@@ -465,7 +489,7 @@ def main():
 
                     break
 
-                direccion = input("Ingrese su direción\n")
+                direccion = input("Ingrese su dirección\n")
 
                 while True:
 
@@ -486,10 +510,11 @@ def main():
 
         elif opcion == 'c':
 
+            print("Saliendo del programa...")
             break
 
         else:
 
-            print("Opcion no valida, ingrese una de las opciones mostradas")
+            print("Opción no valida, ingrese una de las opciones mostradas")
 
 main()
