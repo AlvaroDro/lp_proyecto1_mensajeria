@@ -11,26 +11,16 @@
                 "Asunto": "gracias",
                 "Emisor": "lactunkk",
                 "Mensaje": "guapeton"
-            }
-        ]
-    },
-    {
-        "Nombre": "Teemo",
-        "Apellido": "Capitan",
-        "Usuario": "Teemo",
-        "Password": "Capitan",
-        "Dirrecion": "league",
-        "Casa estudio": "Oflegends",
-        "Bandeja de entrada": [
+            },
             {
-                "Asunto": "hola",
-                "Emisor": "lactunkk",
-                "Mensaje": "tejon ctm"
+                "Asunto": "holi",
+                "Emisor": "Administrador",
+                "Mensaje": "l"
             },
             {
                 "Asunto": "chupa",
-                "Emisor": "lactunkk",
-                "Mensaje": "elpico"
+                "Emisor": "Administrador",
+                "Mensaje": "el copi"
             }
         ]
     },
