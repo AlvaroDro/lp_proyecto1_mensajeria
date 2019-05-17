@@ -32,7 +32,6 @@ def cargar_archivo():
     Retorna:
         contenido (Lista): Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.  
-        main() (funcion): Retorna al menu principal del programa.
 
     """ 
 
@@ -62,13 +61,15 @@ def listar_usuarios():
     Crea una lista con todos los nombres de usuarios dentro del
     archivo JSON. 
     Retorna:
-        lista: Retorna una lista con todos los nombres de usuarios
+        lista_usuarios (Lista): Retorna una lista con todos los nombres de usuarios
         que estén en el archivo JSON.
     """
     lista_usuarios = []
     for elementos in cargar_archivo():
-        # Busca obtener los elementos del JSON "Usuarios" y pasarcelo
-        # a una lista
+        """ 
+        Busca obtener los elementos del JSON "Usuarios" y pasarcelo
+         a una lista
+        """ 
         lista_usuarios.append(elementos.get("Usuario").lower())
     return lista_usuarios
 
@@ -153,8 +154,10 @@ def vista_de_sesion(indice_cuenta):
                     print("\nMensajes recibidos")
 
                     for elementos in bandeja:
-                        # Busca imprimir por pantalla de forma ordenada
-                        # lo que contiene la bandeja de entrada de este usuario
+                        """
+                        Busca imprimir por pantalla de forma ordenada
+                        lo que contiene la bandeja de entrada de este usuario.
+                        """
 
                         print("Mensaje nº",i,"\nFuente: "+elementos.get(
                             "Emisor")+"\tAsunto: "+elementos.get("Asunto"),
@@ -204,6 +207,7 @@ def vista_de_sesion(indice_cuenta):
 
                         responder_mensaje = input("Ingrese el número del "+
                             "mensaje a responder:\n")
+                        
                         if not responder_mensaje.isdigit():
                             print("\n[!]Ingrese valores correctos para "+
                                 "responder un mensaje\n")
@@ -258,10 +262,12 @@ def vista_de_sesion(indice_cuenta):
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
-                    # Realiza una operacion para buscar en cargar_datos
-                    # si el usuario al que se quiere enviar el mensaje
-                    # existe y asi poder manejar los datos de la 
-                    # Bandeja de entrada de este
+                    """
+                     Realiza una operacion para buscar en cargar_datos
+                     si el usuario al que se quiere enviar el mensaje
+                     existe y asi poder manejar los datos de la 
+                     Bandeja de entrada de este 
+                    """
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
@@ -314,6 +320,7 @@ def vista_de_sesion(indice_cuenta):
                         if nueva_pass != nueva_pass_confirmacion:
                             print("\n[!] No son iguales las password\n")
                             continue
+
                         encriptacion = nueva_pass.encode("UTF-8")
                         nueva_pass = hashlib.sha256(encriptacion)
                         break
@@ -456,8 +463,10 @@ def vista_de_administrador():
             if usuario_elegido in listar_usuarios():
 
                 for  elementos in cargar_datos:
-                    # Ayuda a cargar los datos del JSON para entregar
-                    # la bandeja de entrada de este usuario ingresado
+                    """
+                    Ayuda a cargar los datos del JSON para entregar
+                    la bandeja de entrada de este usuario ingresado.
+                    """
                     indice = listar_usuarios().index(usuario_elegido)
 
                     bandeja = cargar_datos[indice].get("Bandeja de entrada")
@@ -474,9 +483,11 @@ def vista_de_administrador():
                             print("\nMensajes recibidos:\n")
 
                             for elementos in bandeja:
-                                # Ayuda a la impresion ordenada de los
-                                # datos de la bandeja de entrada del
-                                # usuario pedido
+                                """
+                                Ayuda a la impresion ordenada de los
+                                 datos de la bandeja de entrada del
+                                 usuario.
+                                """
                                 print("Mensaje nº",i,"\nFuente: "+
                                     elementos.get("Emisor")+"\tAsunto: "+
                                     elementos.get("Asunto"),
@@ -527,10 +538,12 @@ def vista_de_administrador():
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
-                    # Ayuda a cargar los datos del JSON 
-                    # para saber si el destinatario 
-                    # existe y poder manejar los datos de
-                    # la bandeja de entrada de este
+                    """
+                    carga los datos del JSON 
+                    para saber si el destinatario 
+                    existe y poder manejar los datos de
+                    la bandeja de entrada de este.
+                    """
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
