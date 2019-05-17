@@ -156,8 +156,9 @@ def vista_de_sesion(indice_cuenta):
                 else:
 
                     i = 1
-                    print("\nMensajes recibidos")
-
+                    print("***********************************")
+                    print("\n\tMensajes recibidos")
+                    print("***********************************")
                     for elementos in bandeja:
                         """
                         Busca imprimir por pantalla de forma ordenada
@@ -169,13 +170,15 @@ def vista_de_sesion(indice_cuenta):
                         "\n\nMensaje:\n"+elementos.get("Mensaje")+"\n")
 
                         i = i + 1 
-
+                    #print("***********************************")
+                    print("***********************************\n")
                     break
 
             if len(bandeja) != 0:
 
                 while True:
                     print("*****************************")
+                    print("\tOpciones")
                     print("*****************************")
                     print("a.-Eliminar mensaje")
                     print("b.-Responder")
