@@ -2,6 +2,7 @@ import json
 import os
 import hashlib
 import os.path
+import getpass
                                                                            
 RUTA_DEL_ARCHIVO = "B_D/bd.json" #ruta donde se encuentra el JSON
 
@@ -304,16 +305,17 @@ def vista_de_sesion(indice_cuenta):
                 if opcion == 'a':
                     while True:
 
-                        nueva_pass = input("Ingrese su nueva password:\n")
-                        nueva_pass_confirmacion = input("Ingrese nuevamente"+
-                        " la password a cambiar:\n")
+                        nueva_pass = getpass.getpass("Ingrese su nueva"+
+                            " password:\n")
+                        nueva_pass_confirmacion = getpass.getpass("Ingrese "+
+                            "nuevamente la password a cambiar:\n")
 
 
                         if nueva_pass != nueva_pass_confirmacion:
                             print("\n[!] No son iguales las password\n")
                             continue
-                        encrypt = nueva_pass.encode("UTF-8")
-                        nueva_pass = hashlib.sha256(encrypt)
+                        encriptacion = nueva_pass.encode("UTF-8")
+                        nueva_pass = hashlib.sha256(encriptacion)
                         break
 
                     cargar_datos[indice_cuenta][
@@ -620,9 +622,10 @@ def main():
         if opcion == 'a':
 
             nombre_inicio = input("Nombre de usuario\n").lower()
-            contra_inicio = input("Password\n")
-            encrypt =contra_inicio.encode("UTF-8")
-            contra_inicio = hashlib.sha256(encrypt)
+            contra_inicio = getpass.getpass("Password\n")
+
+            encriptacion =contra_inicio.encode("UTF-8")
+            contra_inicio = hashlib.sha256(encriptacion)
 
             iniciar_sesion(nombre_inicio, contra_inicio.hexdigest())
 
@@ -645,15 +648,15 @@ def main():
                     print("\n[!] Ese nombre de usuario no esta permitido\n")
 
                 while True:    
-                    password = input("Ingrese su password de usuario\n")
-                    password_confirmacion = input("Ingrese nuevamente su "+
-                        "password de usuario\n")
+                    password = getpass.getpass("Ingrese su password de usuario\n")
+                    password_confirmacion = getpass.getpass("Ingrese "+
+                        "nuevamente su password de usuario\n")
 
                     if password != password_confirmacion:
                         print("\n[!] No son iguales las password\n")
                         continue
-                    encrypt = password.encode("UTF-8")
-                    password = hashlib.sha256(encrypt)
+                    encriptacion = password.encode("UTF-8")
+                    password = hashlib.sha256(encriptacion)
                     break
 
                 while True:
