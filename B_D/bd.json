@@ -1,74 +1,11 @@
 [
     {
-        "Bandeja de entrada": [
-            {
-                "Emisor": "lactunkk",
-                "Asunto": "gracias",
-                "Mensaje": "guapeton"
-<<<<<<< HEAD
-            }
-        ],
-        "Nombre": "Christopher",
-        "Dirrecion": "Puerto montt",
-        "Usuario": "lactunkk",
-        "Casa estudio": "Ulagos",
-        "Apellido": "Pavez",
-        "Password": "chris"
-    },
-    {
-        "Bandeja de entrada": [
-            {
-                "Emisor": "lactunkk",
-                "Asunto": "hola",
-                "Mensaje": "tejon ctm"
-            },
-            {
-                "Emisor": "lactunkk",
-                "Asunto": "chupa",
-                "Mensaje": "elpico"
-=======
-            },
-            {
-                "Asunto": "holi",
-                "Emisor": "Administrador",
-                "Mensaje": "l"
-            },
-            {
-                "Asunto": "chupa",
-                "Emisor": "Administrador",
-                "Mensaje": "el copi"
->>>>>>> 8da12468fd782d4a9cec93966f9b2e6b155ae459
-            }
-        ],
-        "Nombre": "Teemo",
-        "Dirrecion": "league",
-        "Usuario": "Teemo",
-        "Casa estudio": "Oflegends",
-        "Apellido": "Capitan",
-        "Password": "Capitan"
-    },
-    {
-        "Bandeja de entrada": [
-            {
-                "Emisor": "lactunkk",
-                "Asunto": "hola",
-                "Mensaje": "paa"
-            }
-        ],
-        "Nombre": "Leo",
-        "Dirrecion": "calle",
-        "Usuario": "leo",
-        "Casa estudio": "Fach",
-        "Apellido": "Pavez",
-        "Password": "papa"
-    },
-    {
-        "Bandeja de entrada": [],
-        "Nombre": "Asd",
-        "Dirrecion": "ssss",
         "Usuario": "asd",
-        "Casa estudio": "Eeee",
-        "Apellido": "Ddddd",
-        "Password": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        "Casa estudio": "Delrio",
+        "Dirrecion": "hospital sotero ",
+        "Bandeja de entrada": [],
+        "Nombre": "Nose",
+        "Password": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Apellido": "Llama"
     }
 ]
