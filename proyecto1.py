@@ -10,11 +10,14 @@ def cargar_archivo(ruta):
     Carga todos los datos del archivo JSON en la variable contenido 
     y esta es retornada.
     Argumentos:
-        ruta (String): Ruta donde se encuentra guardado el archivo JSON
+        ruta (Cadena): Ruta donde se encuentra guardado el archivo JSON
     
     Retorna:
-        contenido (list): Retorna una lista de diccionarios con los datos que 
+        contenido (Lista): Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.
+        
+        main() (funcion): Retorna al menu principal del programa.
+
     """ 
     if not os.path.exists(ruta):
         os.mkdir("B_D", dir_fd=None)
@@ -289,7 +292,8 @@ def vista_de_sesion(indice_cuenta):
                         if nueva_pass != nueva_pass_confirmacion:
                             print("No son iguales las password")
                             continue
-                        nueva_pass = hashlib.sha256()
+                        encrypt = nueva_pass.encode("UTF-8")
+                        nueva_pass = hashlib.sha256(encrypt)
                         break
 
                     cargar_datos[indice_cuenta][
@@ -558,7 +562,7 @@ def iniciar_sesion(nombre_usuario,
                 " principal...")
                 break
         elif nombre_usuario.lower() == 'admin':
-            if contra_usuario == 'admin':
+            if contra_usuario == "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918": #dejar asi 
 
                 return vista_de_administrador()
             else:
@@ -592,7 +596,8 @@ def main():
 
             nombre_inicio = input("Ingrese su nombre de usuario\n").lower()
             contra_inicio = input("ingrese su password de usuario\n")
-            contra_inicio = hashlib.sha256()
+            encrypt =contra_inicio.encode("UTF-8")
+            contra_inicio = hashlib.sha256(encrypt)
 
             iniciar_sesion(nombre_inicio, contra_inicio.hexdigest(), RUTA_DEL_ARCHIVO)
 
@@ -618,7 +623,8 @@ def main():
                     if password != password_confirmacion:
                         print("No son iguales las password")
                         continue
-                    password = hashlib.sha256() #aqui cambio
+                    encrypt = password.encode("UTF-8")
+                    password = hashlib.sha256(encrypt)
                     break
 
                 while True:
