@@ -1,94 +1,61 @@
 [
     {
-<<<<<<< HEAD
-        "Apellido": "algoasd",
-        "Password": "asd",
-        "Nombre": "asd",
-        "Usuario": "asd",
-        "Dirrecion": "la street",
-        "Casa estudio": "la calle",
         "Bandeja de entrada": [
             {
-                "Emisor": "asd",
-                "Asunto": "asd",
-                "Mensaje": "asd"
-=======
-        "Nombre": "Christopher",
-        "Apellido": "Pavez",
-        "Usuario": "lactunkk",
-        "Password": "chris",
-        "Dirrecion": "Puerto montt",
-        "Casa estudio": "Ulagos",
-        "Bandeja de entrada": [
-            {
+                "Emisor": "lactunkk",
                 "Asunto": "gracias",
-                "Emisor": "lactunkk",
                 "Mensaje": "guapeton"
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
             }
-        ]
+        ],
+        "Nombre": "Christopher",
+        "Dirrecion": "Puerto montt",
+        "Usuario": "lactunkk",
+        "Casa estudio": "Ulagos",
+        "Apellido": "Pavez",
+        "Password": "chris"
     },
     {
-<<<<<<< HEAD
-        "Apellido": "berserk",
-        "Password": "gust123",
-        "Nombre": "guts",
-        "Usuario": "gust",
-        "Dirrecion": "inframundo",
-        "Casa estudio": "la banda del alcon",
-        "Bandeja de entrada": []
-    },
-    {
-        "Apellido": "Asd",
-        "Password": "asd123",
-        "Nombre": "Asd",
-        "Usuario": "ASD1",
-        "Dirrecion": "asd",
-        "Casa estudio": "Asd",
-        "Bandeja de entrada": []
-    },
-    {
-        "Apellido": "Asd",
-        "Password": "SD",
-        "Nombre": "Asd",
-        "Usuario": "aDSD",
-        "Dirrecion": "ds",
-        "Casa estudio": "Asd",
-        "Bandeja de entrada": []
-=======
-        "Nombre": "Teemo",
-        "Apellido": "Capitan",
-        "Usuario": "Teemo",
-        "Password": "Capitan",
-        "Dirrecion": "league",
-        "Casa estudio": "Oflegends",
         "Bandeja de entrada": [
             {
-                "Asunto": "hola",
                 "Emisor": "lactunkk",
+                "Asunto": "hola",
                 "Mensaje": "tejon ctm"
             },
             {
-                "Asunto": "chupa",
                 "Emisor": "lactunkk",
+                "Asunto": "chupa",
                 "Mensaje": "elpico"
             }
-        ]
+        ],
+        "Nombre": "Teemo",
+        "Dirrecion": "league",
+        "Usuario": "Teemo",
+        "Casa estudio": "Oflegends",
+        "Apellido": "Capitan",
+        "Password": "Capitan"
     },
     {
-        "Nombre": "Leo",
-        "Apellido": "Pavez",
-        "Usuario": "leo",
-        "Password": "papa",
-        "Dirrecion": "calle",
-        "Casa estudio": "Fach",
         "Bandeja de entrada": [
             {
-                "Asunto": "hola",
                 "Emisor": "lactunkk",
+                "Asunto": "hola",
                 "Mensaje": "paa"
             }
-        ]
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
+        ],
+        "Nombre": "Leo",
+        "Dirrecion": "calle",
+        "Usuario": "leo",
+        "Casa estudio": "Fach",
+        "Apellido": "Pavez",
+        "Password": "papa"
+    },
+    {
+        "Bandeja de entrada": [],
+        "Nombre": "Asd",
+        "Dirrecion": "ssss",
+        "Usuario": "asd",
+        "Casa estudio": "Eeee",
+        "Apellido": "Ddddd",
+        "Password": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
 ]
