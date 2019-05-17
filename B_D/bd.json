@@ -5,6 +5,7 @@
                 "Emisor": "lactunkk",
                 "Asunto": "gracias",
                 "Mensaje": "guapeton"
+<<<<<<< HEAD
             }
         ],
         "Nombre": "Christopher",
@@ -25,6 +26,18 @@
                 "Emisor": "lactunkk",
                 "Asunto": "chupa",
                 "Mensaje": "elpico"
+=======
+            },
+            {
+                "Asunto": "holi",
+                "Emisor": "Administrador",
+                "Mensaje": "l"
+            },
+            {
+                "Asunto": "chupa",
+                "Emisor": "Administrador",
+                "Mensaje": "el copi"
+>>>>>>> 8da12468fd782d4a9cec93966f9b2e6b155ae459
             }
         ],
         "Nombre": "Teemo",

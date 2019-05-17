@@ -2,7 +2,7 @@ import json
 import os
 import hashlib
                                                                            
-ruta_del_archivo = "B_D/bd.json" #ruta donde se encuentra el JSON
+RUTA_DEL_ARCHIVO = "B_D/bd.json" #ruta donde se encuentra el JSON
 
 def cargar_archivo(ruta):
     """
@@ -49,7 +49,9 @@ def listar_usuarios():
         que estén en el archivo JSON.
     """
     lista_usuarios = []
-    for elementos in cargar_archivo(ruta_del_archivo):
+    for elementos in cargar_archivo(RUTA_DEL_ARCHIVO):
+        # Busca obtener los elementos del JSON "Usuarios" y pasarcelo
+        # a una lista
         lista_usuarios.append(elementos.get("Usuario").lower())
     return lista_usuarios
 
@@ -80,9 +82,9 @@ def crear_usuario(nombre_usuario, password,
                 "Bandeja de entrada":[] 
                 }                       
 
-    nueva_persona = cargar_archivo(ruta_del_archivo)
+    nueva_persona = cargar_archivo(RUTA_DEL_ARCHIVO)
     nueva_persona.append(persona)
-    sobrescribir_archivo(ruta_del_archivo, nueva_persona)
+    sobrescribir_archivo(RUTA_DEL_ARCHIVO, nueva_persona)
 
     print("Usuario agregado exitosamente, presione Enter para continuar")
 
@@ -103,7 +105,7 @@ def vista_de_sesion(indice_cuenta):
         indice_cuenta (String): índice del nombre de usuario con el que
                                 inicio sesión.
     """
-    cargar_datos = cargar_archivo(ruta_del_archivo)
+    cargar_datos = cargar_archivo(RUTA_DEL_ARCHIVO)
     while True:
         print("Presione 'a' para entrar a la bandeja de entrada")
         print("Presione 'b' para redactar un mensaje")
@@ -117,7 +119,7 @@ def vista_de_sesion(indice_cuenta):
             while True:
                 if len(bandeja) == 0:
                     print(
-                        "No tiene, ningún nuevo mensaje, volviendo al menú "+
+                        "No tiene ningún nuevo mensaje, volviendo al menú "+
                         "de usuario...")
                     break
 
@@ -127,6 +129,8 @@ def vista_de_sesion(indice_cuenta):
                     print("\nMensajes recibidos")
 
                     for elementos in bandeja:
+                        # Busca imprimir por pantalla de forma ordenada
+                        # lo que contiene la bandeja de entrada de este usuario
 
                         print("Mensaje nº",i,"\nFuente: "+elementos.get(
                             "Emisor")+"\tAsunto: "+elementos.get("Asunto"),
@@ -154,7 +158,7 @@ def vista_de_sesion(indice_cuenta):
                         if not eliminar_mensaje.isdigit():
                             print("ingrese valores correctos para eliminar")
                             continue
-                        
+
                         elif (int(eliminar_mensaje) <= 0 or 
                              int(eliminar_mensaje) > len(bandeja)):
 
@@ -167,7 +171,7 @@ def vista_de_sesion(indice_cuenta):
                             "Bandeja de entrada"].pop(int(eliminar_mensaje))
 
                             print("Mensaje eliminado correctamente")
-                            sobrescribir_archivo(ruta_del_archivo,
+                            sobrescribir_archivo(RUTA_DEL_ARCHIVO,
                                                  cargar_datos)   
 
                     elif opcion =="b":
@@ -189,7 +193,13 @@ def vista_de_sesion(indice_cuenta):
                         responder_mensaje = int(responder_mensaje) - 1
                         remitente = bandeja[responder_mensaje].get("Emisor")
 
-                        if remitente in listar_usuarios():
+                        if bandeja[responder_mensaje].get(
+                                                "Emisor") == 'Administrador':
+                            print("No puedes responder mensajes de aun"+
+                            " administrador")
+                            continue
+
+                        elif remitente in listar_usuarios():
                             indice = listar_usuarios().index(remitente)
                         mensaje_asunto = input("Ingrese el asunto "+
                             "(opcional): ")
@@ -203,7 +213,7 @@ def vista_de_sesion(indice_cuenta):
                                   }
                         cargar_datos[indice][
                                         "Bandeja de entrada"].append(mensaje)
-                        sobrescribir_archivo(ruta_del_archivo, cargar_datos)
+                        sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos)
                     elif opcion == "c":
                         break
                     else:
@@ -222,6 +232,10 @@ def vista_de_sesion(indice_cuenta):
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
+                    # Realiza una operacion para buscar en cargar_datos
+                    # si el usuario al que se quiere enviar el mensaje
+                    # existe y asi poder manejar los datos de la 
+                    # Bandeja de entrada de este
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
@@ -239,7 +253,7 @@ def vista_de_sesion(indice_cuenta):
                         cargar_datos[indice]["Bandeja de entrada"].append(
                             mensaje)
 
-                        sobrescribir_archivo(ruta_del_archivo, cargar_datos) 
+                        sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos) 
             else:
                 print("Destinatario no existente, volviendo al menú de"+
                 " usuario...")
@@ -276,7 +290,7 @@ def vista_de_sesion(indice_cuenta):
                                                 "Password"
                                                ] = nueva_pass.hexdigest()
 
-                    sobrescribir_archivo(ruta_del_archivo,cargar_datos)
+                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
                     print("Cambio de password realizada")
 
                 elif opcion == 'b':
@@ -291,7 +305,7 @@ def vista_de_sesion(indice_cuenta):
                     cargar_datos[indice_cuenta][
                                                 "Nombre"
                                                 ] = nuevo_nombre.capitalize()
-                    sobrescribir_archivo(ruta_del_archivo,cargar_datos)
+                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
                     print("Cambio de nombre realizada")
 
                 elif opcion == 'c':
@@ -308,7 +322,7 @@ def vista_de_sesion(indice_cuenta):
                     cargar_datos[indice_cuenta][
                                                 "Apellido"
                                                ] = nuevo_apellido
-                    sobrescribir_archivo(ruta_del_archivo,cargar_datos)
+                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
                     print("Cambio de apellido realizada")
 
                 elif opcion == 'd':
@@ -317,7 +331,7 @@ def vista_de_sesion(indice_cuenta):
                     cargar_datos[indice_cuenta][
                                                 "Dirrecion"
                                                ] = nueva_dirreccion
-                    sobrescribir_archivo(ruta_del_archivo,cargar_datos)
+                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
                     print("Cambio de dirección realizada")
 
                 elif opcion == 'e':
@@ -332,7 +346,7 @@ def vista_de_sesion(indice_cuenta):
                                 ] = nueva_casa_de_estudio.capitalize()
 
 
-                    sobrescribir_archivo(ruta_del_archivo,cargar_datos)
+                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
                     print("Cambio de casa de estudio realizada")
 
                 elif opcion == 'f':
@@ -353,6 +367,161 @@ def vista_de_sesion(indice_cuenta):
         else:
             print("Opción no valida, ingrese una de las opciones mostradas")
 
+def vista_de_administrador():
+    """
+    Muestra todas las opciones para el administrador, las opciones que se 
+    despliegan son las siguientes:  
+
+    a) Eliminar un usuario: Opción para visualizar los usuarios
+        creados, los cuales pueden ser eliminados.
+
+    b) Eliminar un mensaje: Opción que visualiza los usuarios
+        de la aplicacion y permite la eliminacion de los mensajes
+        recibidos por este usuario
+
+    c) Redactar un mensaje: Envió de mensajes a los usuarios
+        de la aplicación.
+
+    d) Salir del administrador y volver al menu principal.
+
+"""
+
+    cargar_datos = cargar_archivo(RUTA_DEL_ARCHIVO)
+    while True:
+        print("Bienvenido administrador")
+        print("Presione 'a' para eliminar un usuario")
+        print("Presione 'b' para eliminar un mensaje de un usuario")
+        print("Presione 'c' para redactar un mensaje") 
+        print("Presione 'd' para salir del administrador")
+        opcion = input("Digite su opción: ").lower()
+
+        if opcion == 'a':
+            print("Posibles usuarios a eliminar: ", listar_usuarios())
+            lista = listar_usuarios()
+
+            usuario_eliminar = input("Ingrese al usuario: ").lower()
+
+            if usuario_eliminar in lista:
+                indice = lista.index(usuario_eliminar)
+                cargar_datos.pop(indice)
+
+                sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos)
+                print("Usuario eliminado correctamente")
+            else:
+                print("Usuario no existente, volviendo al menú de"+
+                    " administrador...")
+                continue
+
+        elif opcion == 'b':
+            lista = listar_usuarios()
+            print(lista)
+            usuario_elegido = input("Ingrese a cual usuario quiere ver "+
+                "los mensajes: ").lower()
+            if usuario_elegido in listar_usuarios():
+
+                for  elementos in cargar_datos:
+                    # Ayuda a cargar los datos del JSON para entregar
+                    # la bandeja de entrada de este usuario ingresado
+                    indice = listar_usuarios().index(usuario_elegido)
+
+                    bandeja = cargar_datos[indice].get("Bandeja de entrada")
+
+                    while True:
+                        if len(bandeja) == 0:
+                            print(
+                                "No tiene ningún mensaje este usuario, "+
+                                "volviendo al menú de administrador...")
+                            break
+
+                        else:
+                            i = 1
+                            print("\nMensajes recibidos")
+
+                            for elementos in bandeja:
+                                # Ayuda a la impresion ordenada de los
+                                # datos de la bandeja de entrada del
+                                # usuario pedido
+                                print("Mensaje nº",i,"\nFuente: "+
+                                    elementos.get("Emisor")+"\tAsunto: "+
+                                    elementos.get("Asunto"),
+                                    "\n\nMensaje:\n"+elementos.get("Mensaje")+
+                                    "\n")
+                                i = i + 1 
+                        break
+
+                    if len(bandeja) != 0:
+
+                        while True:
+                            eliminar_mensaje = input("Ingrese el número del"
+                            +" mensaje a eliminar: ")
+
+                            if not eliminar_mensaje.isdigit():
+                                print("ingrese valores correctos para "+
+                                    "eliminar")
+                                continue
+
+                            elif (int(eliminar_mensaje) <= 0 or 
+                                 int(eliminar_mensaje) > len(bandeja)):
+
+                                print("ingrese valores correctos para "+
+                                    "eliminar")
+                                continue
+
+                            else:
+                                eliminar_mensaje = int(eliminar_mensaje) - 1
+                                cargar_datos[indice][
+                                "Bandeja de entrada"].pop(int(
+                                                            eliminar_mensaje))
+
+                                print("Mensaje eliminado correctame")
+                                sobrescribir_archivo(RUTA_DEL_ARCHIVO,
+                                                 cargar_datos)
+                            break
+                    break    
+            else:
+                print("Usuario no existente, volviendo al menú de"+
+                        " administrador...")
+
+        elif opcion == 'c':
+            print("Posibles destinatarios: ",listar_usuarios())
+
+            lista = listar_usuarios()
+
+            mensaje_destinatario = input("Ingrese el destinatario: ")
+
+            if mensaje_destinatario.lower() in lista:
+
+                for usuarios in cargar_datos:
+                    # Ayuda a cargar los datos del JSON 
+                    # para saber si el destinatario 
+                    # existe y poder manejar los datos de
+                    # la bandeja de entrada de este
+
+                    if mensaje_destinatario.lower() in usuarios[
+                                                       "Usuario"].lower():
+
+                        indice = cargar_datos.index(usuarios)
+                        mensaje_asunto = input("Ingrese el asunto "+
+                            "(opcional): ")
+                        mensaje_redactato = input("Escriba el mensaje: ")
+                        mensaje = {"Asunto":mensaje_asunto,
+                                   "Emisor":"Administrador",
+                                   "Mensaje":mensaje_redactato
+                                   }
+                        cargar_datos[indice]["Bandeja de entrada"].append(
+                            mensaje)
+
+                        sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos) 
+            else:
+                print("Destinatario no existente, volviendo al menú de"+
+                " administrador...")
+
+        elif opcion == 'd':
+            print("Saliendo del administrador...")
+            break
+                
+        else:
+            print("Opción no valida, ingrese una de las opciones mostradas")
 
 def iniciar_sesion(nombre_usuario, 
                    contra_usuario,
@@ -368,6 +537,7 @@ def iniciar_sesion(nombre_usuario,
         archivo (String): Ruta donde se encuentra guardado el archivo 
         JSON.
     """
+
     cargar_datos = cargar_archivo(archivo)
 
     while True:
@@ -381,6 +551,15 @@ def iniciar_sesion(nombre_usuario,
                 print("Error de inicio de sesión, volviendo al menú"+
                 " principal...")
                 break
+        elif nombre_usuario.lower() == 'admin':
+            if contra_usuario == 'admin':
+
+                return vista_de_administrador()
+            else:
+                print("Error de inicio de sesión,volviendo al menú"+
+                    " principal")
+                break
+
         else:
             print("Error de inicio de sesión, volviendo al menú "+
                 "principal...")
@@ -409,7 +588,12 @@ def main():
             contra_inicio = input("ingrese su password de usuario\n")
             contra_inicio = hashlib.sha256()
 
+<<<<<<< HEAD
             iniciar_sesion(nombre_inicio, contra_inicio.hexdigest(), ruta_del_archivo)
+=======
+
+            iniciar_sesion(nombre_inicio, contra_inicio, RUTA_DEL_ARCHIVO)
+>>>>>>> 8da12468fd782d4a9cec93966f9b2e6b155ae459
 
 
         elif opcion == 'b':
@@ -421,6 +605,8 @@ def main():
                 if nombre_usuario.lower() in lista:
                     print("Ese nombre de usuario ya existe")
                     continue
+                elif nombre_usuario.lower() == 'admin':
+                    print("Ese nombre de usuario no esta permitido")
 
                 while True:    
                     password = input("Ingrese su password de usuario\n")
