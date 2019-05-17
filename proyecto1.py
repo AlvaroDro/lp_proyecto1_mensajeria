@@ -31,17 +31,22 @@ def cargar_archivo():
     
     Retorna:
         contenido (Lista): Retorna una lista de diccionarios con los datos que 
-        contiene el archivo JSON.  
+        contiene el archivo JSON.
+        main() (funcion): Retorna a la funcion principal, para 
+        desplegar el menu. 
 
     """ 
 
-    if open(RUTA_DEL_ARCHIVO).read() == '':
-        print("\n[!] base de datos vacia\n")            
-    else:
+    if open(RUTA_DEL_ARCHIVO).read() != '':
         with open(RUTA_DEL_ARCHIVO) as archivo:
             contenido = json.load(archivo)
-        return contenido
-
+        return contenido          
+    else:
+        print("\n[!] base de datos vacia, cree un usuario\n")
+        datos = []
+        with open(RUTA_DEL_ARCHIVO, 'w') as archivo:
+            json.dump(datos, archivo)
+        return main() 
 
 def sobrescribir_archivo(diccionario_con_datos_nuevos):
     """
@@ -207,7 +212,7 @@ def vista_de_sesion(indice_cuenta):
 
                         responder_mensaje = input("Ingrese el número del "+
                             "mensaje a responder:\n")
-                        
+
                         if not responder_mensaje.isdigit():
                             print("\n[!]Ingrese valores correctos para "+
                                 "responder un mensaje\n")
