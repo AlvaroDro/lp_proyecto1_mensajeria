@@ -1,5 +1,6 @@
 import json
 import os
+import hashlib
                                                                            
 ruta_del_archivo = "B_D/bd.json" #ruta donde se encuentra el JSON
 
@@ -11,9 +12,8 @@ def cargar_archivo(ruta):
         ruta (String): Ruta donde se encuentra guardado el archivo JSON
     
     Retorna:
-        lista: Retorna una lista de diccionarios con los datos que 
+        contenido (list): Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.
-
     """ 
     if len(ruta) != 0:
         with open(ruta) as archivo:
@@ -22,7 +22,7 @@ def cargar_archivo(ruta):
     else:
         datos = "[]"
         with open(ruta, 'w') as archivo:
-            json.dump(ruta, datos)
+            json.dump(datos, archivo)
 
 
 def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
@@ -33,10 +33,6 @@ def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
     Argumentos:
         ruta (String): Ruta donde se encuentra guardado el archivo
         JSON.
-<<<<<<< HEAD
-    
-=======
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
         diccionario_con_datos_nuevos (dict): Diccionario que tiene
         datos nuevos para ser agregados al archivo JSON.
     """
@@ -51,7 +47,6 @@ def listar_usuarios():
     Retorna:
         lista: Retorna una lista con todos los nombres de usuarios
         que estén en el archivo JSON.
-
     """
     lista_usuarios = []
     for elementos in cargar_archivo(ruta_del_archivo):
@@ -65,11 +60,7 @@ def crear_usuario(nombre_usuario, password,
     Toma los parámetros y crea un diccionario con esos datos
     que se guardan en la variable persona, la cual es añadida
     a la lista de diccionarios del archivo JSON en la variable
-<<<<<<< HEAD
-    nueva_persona  y sobrescribe el archivo JSON con estos datos.
-=======
     nueva_persona y sobrescribe el archivo con estos datos.
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
     
     Argumentos:
         nombre_usuario (String): Nombre de usuario de la persona.
@@ -78,7 +69,6 @@ def crear_usuario(nombre_usuario, password,
         apellido (String): Apellido de la persona.
         direccion (String): Dirección de la persona.
         universidad (String): Casa de estudio de la persona.
-
     """
     persona = {
                 "Nombre":nombre,
@@ -102,26 +92,16 @@ def vista_de_sesion(indice_cuenta):
     Muestra todas las opciones para la cuenta que inicio sesión
     utilizando su índice como referencia, las opciones que se despliegan
     son las siguientes:  
-
     a) Bandeja de entrada: Opción para visualizar los mensajes 
         recibidos, los cuales puede responder o eliminar.
-
     b) Redactar un mensaje: Envió de mensajes a los usuarios
         de la aplicación.
-
     c) Configurar perfil: Opción para cambiar la información
         de la cuenta del usuario.
-
-<<<<<<< HEAD
-    d) Salir de la cuenta.
-=======
     d) Salir de la cuenta y volver al menu principal.
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
-
     Argumentos:
         indice_cuenta (String): índice del nombre de usuario con el que
                                 inicio sesión.
-
     """
     cargar_datos = cargar_archivo(ruta_del_archivo)
     while True:
@@ -168,13 +148,8 @@ def vista_de_sesion(indice_cuenta):
 
                     if opcion == "a":
 
-<<<<<<< HEAD
-                        eliminar_mensaje = input("Ingrese el numero del"+
-                                            " mensaje a eliminar: ")
-=======
                         eliminar_mensaje = input("Ingrese el número del"
                             +" mensaje a eliminar: ")
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
                         if not eliminar_mensaje.isdigit():
                             print("ingrese valores correctos para eliminar")
@@ -212,11 +187,7 @@ def vista_de_sesion(indice_cuenta):
                             continue
 
                         responder_mensaje = int(responder_mensaje) - 1
-<<<<<<< HEAD
-                        persona_a_responder = bandeja[responder_mensaje].get("Emisor")
-=======
                         remitente = bandeja[responder_mensaje].get("Emisor")
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
                         if remitente in listar_usuarios():
                             indice = listar_usuarios().index(remitente)
@@ -292,22 +263,18 @@ def vista_de_sesion(indice_cuenta):
 
                         nueva_pass = input("Ingrese su nueva password: ")
                         nueva_pass_confirmacion = input("Ingrese nuevamente"+
-<<<<<<< HEAD
-                            " la password a cambiar: ")
-=======
                         " la password a cambiar: ")
->>>>>>> f1f2ef982f25d46a953cc6ec3d58a02dca2d8fbf
 
 
                         if nueva_pass != nueva_pass_confirmacion:
                             print("No son iguales las password")
                             continue
-
+                        nueva_pass = hashlib.sha256()
                         break
 
                     cargar_datos[indice_cuenta][
                                                 "Password"
-                                               ] = nueva_pass
+                                               ] = nueva_pass.hexdigest()
 
                     sobrescribir_archivo(ruta_del_archivo,cargar_datos)
                     print("Cambio de password realizada")
@@ -400,7 +367,6 @@ def iniciar_sesion(nombre_usuario,
         contra_usuario (String): Contraseña del usuario.
         archivo (String): Ruta donde se encuentra guardado el archivo 
         JSON.
-
     """
     cargar_datos = cargar_archivo(archivo)
 
@@ -425,7 +391,6 @@ def main():
     """
     Menú principal en el cual se maneja todo el programa, obteniendo
     los datos del usuario o el registro de este.
-
     """
     while True:
 
@@ -442,9 +407,9 @@ def main():
 
             nombre_inicio = input("Ingrese su nombre de usuario\n").lower()
             contra_inicio = input("ingrese su password de usuario\n")
+            contra_inicio = hashlib.sha256()
 
-
-            iniciar_sesion(nombre_inicio, contra_inicio, ruta_del_archivo)
+            iniciar_sesion(nombre_inicio, contra_inicio.hexdigest(), ruta_del_archivo)
 
 
         elif opcion == 'b':
@@ -465,7 +430,7 @@ def main():
                     if password != password_confirmacion:
                         print("No son iguales las password")
                         continue
-
+                    password = hashlib.sha256() #aqui cambio
                     break
 
                 while True:
@@ -504,7 +469,7 @@ def main():
 
                 break
 
-            crear_usuario(nombre_usuario, password, 
+            crear_usuario(nombre_usuario, password.hexdigest(), 
                             nombre_real, apellido,
                             direccion, casa_de_estudio)
 
