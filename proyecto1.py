@@ -1,6 +1,7 @@
 import json
 import os
 import hashlib
+import os.path
                                                                            
 RUTA_DEL_ARCHIVO = "B_D/bd.json" #ruta donde se encuentra el JSON
 
@@ -15,14 +16,19 @@ def cargar_archivo(ruta):
         contenido (list): Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.
     """ 
-    if len(ruta) != 0:
+    if not os.path.exists(ruta):
+        os.mkdir("B_D", dir_fd=None)
+        datos = []
+        with open(ruta, 'w') as archivo:
+            json.dump(datos, archivo)
+
+    elif open(ruta).read() == '':
+        print("Lo sentimos debe crear un usuario, [!]base de datos vacia")
+        return main()
+    else:
         with open(ruta) as archivo:
             contenido = json.load(archivo)
         return contenido
-    else:
-        datos = "[]"
-        with open(ruta, 'w') as archivo:
-            json.dump(datos, archivo)
 
 
 def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
@@ -588,12 +594,8 @@ def main():
             contra_inicio = input("ingrese su password de usuario\n")
             contra_inicio = hashlib.sha256()
 
-<<<<<<< HEAD
-            iniciar_sesion(nombre_inicio, contra_inicio.hexdigest(), ruta_del_archivo)
-=======
+            iniciar_sesion(nombre_inicio, contra_inicio.hexdigest(), RUTA_DEL_ARCHIVO)
 
-            iniciar_sesion(nombre_inicio, contra_inicio, RUTA_DEL_ARCHIVO)
->>>>>>> 8da12468fd782d4a9cec93966f9b2e6b155ae459
 
 
         elif opcion == 'b':
