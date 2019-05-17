@@ -52,6 +52,8 @@ def listar_usuarios():
     """
     lista_usuarios = []
     for elementos in cargar_archivo(RUTA_DEL_ARCHIVO):
+        # Busca obtener los elementos del JSON "Usuarios" y pasarcelo
+        # a una lista
         lista_usuarios.append(elementos.get("Usuario").lower())
     return lista_usuarios
 
@@ -126,7 +128,7 @@ def vista_de_sesion(indice_cuenta):
             while True:
                 if len(bandeja) == 0:
                     print(
-                        "No tiene, ningún nuevo mensaje, volviendo al menú "+
+                        "No tiene ningún nuevo mensaje, volviendo al menú "+
                         "de usuario...")
                     break
 
@@ -136,6 +138,8 @@ def vista_de_sesion(indice_cuenta):
                     print("\nMensajes recibidos")
 
                     for elementos in bandeja:
+                        # Busca imprimir por pantalla de forma ordenada
+                        # lo que contiene la bandeja de entrada de este usuario
 
                         print("Mensaje nº",i,"\nFuente: "+elementos.get(
                             "Emisor")+"\tAsunto: "+elementos.get("Asunto"),
@@ -237,6 +241,10 @@ def vista_de_sesion(indice_cuenta):
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
+                    # Realiza una operacion para buscar en cargar_datos
+                    # si el usuario al que se quiere enviar el mensaje
+                    # existe y asi poder manejar los datos de la 
+                    # Bandeja de entrada de este
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
@@ -370,33 +378,28 @@ def vista_de_sesion(indice_cuenta):
 
 def vista_de_administrador():
     """
-    Muestra todas las opciones para el administrador utilizando índice 
-    como referencia para manejar usuarios, las opciones que se 
+    Muestra todas las opciones para el administrador, las opciones que se 
     despliegan son las siguientes:  
 
     a) Eliminar un usuario: Opción para visualizar los usuarios
         creados, los cuales pueden ser eliminados.
 
-    b) Eliminar un mensaje: Opción para visualizar los mensajes
-        enviados y recibidos por usuarios, los cuales
-        pueden ser eliminados
+    b) Eliminar un mensaje: Opción que visualiza los usuarios
+        de la aplicacion y permite la eliminacion de los mensajes
+        recibidos por este usuario
 
     c) Redactar un mensaje: Envió de mensajes a los usuarios
         de la aplicación.
 
     d) Salir del administrador y volver al menu principal.
 
-    Argumentos:
-
 """
 
-
     cargar_datos = cargar_archivo(RUTA_DEL_ARCHIVO)
-
     while True:
-
+        print("Bienvenido administrador")
         print("Presione 'a' para eliminar un usuario")
-        print("Presione 'b' para eliminar un mensaje")
+        print("Presione 'b' para eliminar un mensaje de un usuario")
         print("Presione 'c' para redactar un mensaje") 
         print("Presione 'd' para salir del administrador")
         opcion = input("Digite su opción: ").lower()
@@ -414,28 +417,79 @@ def vista_de_administrador():
                 sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos)
                 print("Usuario eliminado correctamente")
             else:
-                print("Destinatario no existente, volviendo al menú de"+
-                    " usuario...")
+                print("Usuario no existente, volviendo al menú de"+
+                    " administrador...")
                 continue
 
-        elif opcion == 'b': # falta por hacer
-            for  elementos in cargar_datos:
-                print(elementos.get("Usuario"))
+        elif opcion == 'b':
+            lista = listar_usuarios()
+            print(lista)
+            usuario_elegido = input("Ingrese a cual usuario quiere ver "+
+                "los mensajes: ").lower()
+            if usuario_elegido in listar_usuarios():
 
-            eliminar_mensaje = input("ingrese el numero del mensaje a eliminar")
-            if not eliminar_mensaje.isdigit():
-                print("ingrese valores correctos para eliminar")
-                    continue
+                for  elementos in cargar_datos:
+                    # Ayuda a cargar los datos del JSON para entregar
+                    # la bandeja de entrada de este usuario ingresado
+                    indice = listar_usuarios().index(usuario_elegido)
 
-            elif (int(eliminar_mensaje) <= 0 or 
-                  int(eliminar_mensaje) > len(bandeja)):
+                    bandeja = cargar_datos[indice].get("Bandeja de entrada")
 
-                print("ingrese valores correctos para eliminar")
-                continue
+                    while True:
+                        if len(bandeja) == 0:
+                            print(
+                                "No tiene ningún mensaje este usuario, "+
+                                "volviendo al menú de administrador...")
+                            break
 
-            
+                        else:
+                            i = 1
+                            print("\nMensajes recibidos")
 
+                            for elementos in bandeja:
+                                # Ayuda a la impresion ordenada de los
+                                # datos de la bandeja de entrada del
+                                # usuario pedido
+                                print("Mensaje nº",i,"\nFuente: "+
+                                    elementos.get("Emisor")+"\tAsunto: "+
+                                    elementos.get("Asunto"),
+                                    "\n\nMensaje:\n"+elementos.get("Mensaje")+
+                                    "\n")
+                                i = i + 1 
+                        break
 
+                    if len(bandeja) != 0:
+
+                        while True:
+                            eliminar_mensaje = input("Ingrese el número del"
+                            +" mensaje a eliminar: ")
+
+                            if not eliminar_mensaje.isdigit():
+                                print("ingrese valores correctos para "+
+                                    "eliminar")
+                                continue
+
+                            elif (int(eliminar_mensaje) <= 0 or 
+                                 int(eliminar_mensaje) > len(bandeja)):
+
+                                print("ingrese valores correctos para "+
+                                    "eliminar")
+                                continue
+
+                            else:
+                                eliminar_mensaje = int(eliminar_mensaje) - 1
+                                cargar_datos[indice][
+                                "Bandeja de entrada"].pop(int(
+                                                            eliminar_mensaje))
+
+                                print("Mensaje eliminado correctame")
+                                sobrescribir_archivo(RUTA_DEL_ARCHIVO,
+                                                 cargar_datos)
+                            break
+                    break    
+            else:
+                print("Usuario no existente, volviendo al menú de"+
+                        " administrador...")
 
         elif opcion == 'c':
             print("Posibles destinatarios: ",listar_usuarios())
@@ -447,6 +501,10 @@ def vista_de_administrador():
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
+                    # Ayuda a cargar los datos del JSON 
+                    # para saber si el destinatario 
+                    # existe y poder manejar los datos de
+                    # la bandeja de entrada de este
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
@@ -505,9 +563,12 @@ def iniciar_sesion(nombre_usuario,
                 break
         elif nombre_usuario.lower() == 'admin':
             if contra_usuario == 'admin':
-                print("Bienvenido administrador")
 
                 return vista_de_administrador()
+            else:
+                print("Error de inicio de sesión,volviendo al menú"+
+                    " principal")
+                break
 
         else:
             print("Error de inicio de sesión, volviendo al menú "+
