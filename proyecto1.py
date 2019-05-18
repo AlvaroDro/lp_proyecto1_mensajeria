@@ -1,44 +1,77 @@
 import json
 import os
+import hashlib
+import os.path
+import getpass
                                                                            
 RUTA_DEL_ARCHIVO = "B_D/bd.json" #ruta donde se encuentra el JSON
 
-def cargar_archivo(ruta):
+def inicializar():
+    """
+    Busca los archivos y carpetas necesarios para que funcione el
+    programa y los crea en el caso de que no esten.
+    """
+    if not os.path.exists("B_D"):
+        os.mkdir("B_D", dir_fd=None)
+        datos = []
+        with open(RUTA_DEL_ARCHIVO, 'w') as archivo:
+            json.dump(datos, archivo)
+        crear_administrador()
+
+    elif os.path.exists("B_D"):
+        if not os.path.exists(RUTA_DEL_ARCHIVO):
+            datos = []
+            with open(RUTA_DEL_ARCHIVO, 'w') as archivo:
+                json.dump(datos, archivo)
+            crear_administrador()
+
+def crear_administrador():
+    """
+    Funcion que inicializa la creacion del JSON con el administrador.
+    """
+    administrador = {
+                "Usuario":"admin",
+                "Password":"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                "Bandeja de entrada":[] 
+                }                       
+    nuevo_admin = cargar_archivo()
+    nuevo_admin.append(administrador)
+    sobrescribir_archivo(nuevo_admin)
+
+def cargar_archivo():
     """
     Carga todos los datos del archivo JSON en la variable contenido 
     y esta es retornada.
-    Argumentos:
-        ruta (String): Ruta donde se encuentra guardado el archivo JSON
     
     Retorna:
-        lista: Retorna una lista de diccionarios con los datos que 
+        contenido (Lista): Retorna una lista de diccionarios con los datos que 
         contiene el archivo JSON.
-
+        main() (funcion): Retorna a la funcion principal, para 
+        desplegar el menu. 
     """ 
-    if len(ruta) != 0:
-        with open(ruta) as archivo:
+
+    if open(RUTA_DEL_ARCHIVO).read() != '':
+        with open(RUTA_DEL_ARCHIVO) as archivo:
             contenido = json.load(archivo)
-        return contenido
+        return contenido          
     else:
-        datos = "[]"
-        with open(ruta, 'w') as archivo:
-            json.dump(ruta, datos)
+        print("\n[!] base de datos vacia, cree un usuario\n")
+        datos = []
+        with open(RUTA_DEL_ARCHIVO, 'w') as archivo:
+            json.dump(datos, archivo)
+        return main() 
 
-
-def sobrescribir_archivo(ruta, diccionario_con_datos_nuevos):
+def sobrescribir_archivo(diccionario_con_datos_nuevos):
     """
     Abre el archivo JSON y sobrescribe el archivo con 
     los datos del diccionario que se le entrega como parámetro.
     
     Argumentos:
-        ruta (String): Ruta donde se encuentra guardado el archivo
-        JSON.
         diccionario_con_datos_nuevos (dict): Diccionario que tiene
         datos nuevos para ser agregados al archivo JSON.
-
     """
 
-    with open(ruta, 'w') as archivo:
+    with open(RUTA_DEL_ARCHIVO, 'w') as archivo:
         json.dump(diccionario_con_datos_nuevos, archivo, indent=4)
 
 def listar_usuarios():
@@ -46,14 +79,15 @@ def listar_usuarios():
     Crea una lista con todos los nombres de usuarios dentro del
     archivo JSON. 
     Retorna:
-        lista: Retorna una lista con todos los nombres de usuarios
+        lista_usuarios (Lista): Retorna una lista con todos los nombres de usuarios
         que estén en el archivo JSON.
-
     """
     lista_usuarios = []
-    for elementos in cargar_archivo(RUTA_DEL_ARCHIVO):
-        # Busca obtener los elementos del JSON "Usuarios" y pasarcelo
-        # a una lista
+    for elementos in cargar_archivo():
+        """ 
+        Busca obtener los elementos del JSON "Usuarios" y pasarcelo
+         a una lista
+        """ 
         lista_usuarios.append(elementos.get("Usuario").lower())
     return lista_usuarios
 
@@ -73,7 +107,6 @@ def crear_usuario(nombre_usuario, password,
         apellido (String): Apellido de la persona.
         direccion (String): Dirección de la persona.
         universidad (String): Casa de estudio de la persona.
-
     """
     persona = {
                 "Nombre":nombre,
@@ -85,11 +118,12 @@ def crear_usuario(nombre_usuario, password,
                 "Bandeja de entrada":[] 
                 }                       
 
-    nueva_persona = cargar_archivo(RUTA_DEL_ARCHIVO)
+    nueva_persona = cargar_archivo()
     nueva_persona.append(persona)
-    sobrescribir_archivo(RUTA_DEL_ARCHIVO, nueva_persona)
+    sobrescribir_archivo(nueva_persona)
 
-    print("Usuario agregado exitosamente, presione Enter para continuar")
+    print("\n[+] Usuario agregado exitosamente, presione "+
+        "Enter para continuar\n")
 
 
 def vista_de_sesion(indice_cuenta):
@@ -97,29 +131,29 @@ def vista_de_sesion(indice_cuenta):
     Muestra todas las opciones para la cuenta que inicio sesión
     utilizando su índice como referencia, las opciones que se despliegan
     son las siguientes:  
-
     a) Bandeja de entrada: Opción para visualizar los mensajes 
         recibidos, los cuales puede responder o eliminar.
-
     b) Redactar un mensaje: Envió de mensajes a los usuarios
         de la aplicación.
-
     c) Configurar perfil: Opción para cambiar la información
         de la cuenta del usuario.
-
     d) Salir de la cuenta y volver al menu principal.
-
     Argumentos:
         indice_cuenta (String): índice del nombre de usuario con el que
                                 inicio sesión.
-
     """
-    cargar_datos = cargar_archivo(RUTA_DEL_ARCHIVO)
+    cargar_datos = cargar_archivo()
     while True:
+        print("****************************************************")
+        print("\t|Bienvenid@ : "+cargar_datos[indice_cuenta].get("Usuario")+
+            "|")
+        print("****************************************************")
         print("Presione 'a' para entrar a la bandeja de entrada")
         print("Presione 'b' para redactar un mensaje")
         print("Presione 'c' para configurar su perfil") 
         print("Presione 'd' para salir de la cuenta")
+        print("****************************************************")
+        print("****************************************************\n")
         opcion = input("Digite su opción: ").lower()
 
         if opcion == 'a':
@@ -128,50 +162,58 @@ def vista_de_sesion(indice_cuenta):
             while True:
                 if len(bandeja) == 0:
                     print(
-                        "No tiene ningún nuevo mensaje, volviendo al menú "+
-                        "de usuario...")
+                        "\n[*] No tiene ningún nuevo mensaje, volviendo al"+
+                        " menú  de usuario...\n")
                     break
 
                 else:
 
                     i = 1
-                    print("\nMensajes recibidos")
-
+                    print("***********************************")
+                    print("\n\tMensajes recibidos")
+                    print("***********************************")
                     for elementos in bandeja:
-                        # Busca imprimir por pantalla de forma ordenada
-                        # lo que contiene la bandeja de entrada de este usuario
+                        """
+                        Busca imprimir por pantalla de forma ordenada
+                        lo que contiene la bandeja de entrada de este usuario.
+                        """
 
                         print("Mensaje nº",i,"\nFuente: "+elementos.get(
                             "Emisor")+"\tAsunto: "+elementos.get("Asunto"),
                         "\n\nMensaje:\n"+elementos.get("Mensaje")+"\n")
 
                         i = i + 1 
-
+                    #print("***********************************")
+                    print("***********************************\n")
                     break
 
             if len(bandeja) != 0:
 
                 while True:
-
+                    print("*****************************")
+                    print("\tOpciones")
+                    print("*****************************")
                     print("a.-Eliminar mensaje")
                     print("b.-Responder")
                     print("c.-Salir al menú de usuario")
+                    print("*****************************")
+                    print("*****************************\n")
                     opcion = input("")
                     opcion = opcion.lower()
 
                     if opcion == "a":
 
                         eliminar_mensaje = input("Ingrese el número del"
-                            +" mensaje a eliminar: ")
+                            +" mensaje a eliminar:\n")
 
                         if not eliminar_mensaje.isdigit():
-                            print("ingrese valores correctos para eliminar")
+                            print("\n[!] Ingrese valores correctos para eliminar\n")
                             continue
 
                         elif (int(eliminar_mensaje) <= 0 or 
                              int(eliminar_mensaje) > len(bandeja)):
 
-                            print("ingrese valores correctos para eliminar")
+                            print("\n[!] Ingrese valores correctos para eliminar\n")
                             continue
 
                         else:
@@ -179,24 +221,24 @@ def vista_de_sesion(indice_cuenta):
                             cargar_datos[indice_cuenta][
                             "Bandeja de entrada"].pop(int(eliminar_mensaje))
 
-                            print("Mensaje eliminado correctamente")
-                            sobrescribir_archivo(RUTA_DEL_ARCHIVO,
-                                                 cargar_datos)   
+                            print("\n[+] Mensaje eliminado correctamente\n")
+                            sobrescribir_archivo(cargar_datos)   
 
                     elif opcion =="b":
 
                         responder_mensaje = input("Ingrese el número del "+
-                            "mensaje a responder: ")
+                            "mensaje a responder:\n")
+
                         if not responder_mensaje.isdigit():
-                            print("ingrese valores correctos para responder"+
-                            " un mensaje")
+                            print("\n[!]Ingrese valores correctos para "+
+                                "responder un mensaje\n")
                             continue
 
                         if (int(responder_mensaje) <= 0 or 
                             int(responder_mensaje) > len(bandeja)):
 
-                            print("ingrese valores correctos para responder"+
-                            " un mensaje")
+                            print("\n[!] Ingrese valores correctos para "+
+                                "responder un mensaje\n")
                             continue
 
                         responder_mensaje = int(responder_mensaje) - 1
@@ -204,16 +246,16 @@ def vista_de_sesion(indice_cuenta):
 
                         if bandeja[responder_mensaje].get(
                                                 "Emisor") == 'Administrador':
-                            print("No puedes responder mensajes de aun"+
-                            " administrador")
+                            print("\n[!] No puedes responder mensajes de aun"+
+                            " administrador\n")
                             continue
 
                         elif remitente in listar_usuarios():
                             indice = listar_usuarios().index(remitente)
                         mensaje_asunto = input("Ingrese el asunto "+
-                            "(opcional): ")
+                            "(opcional):\n")
 
-                        mensaje_redactato = input("Escriba el mensaje: ")
+                        mensaje_redactato = input("Escriba el mensaje:\n")
                         mensaje = {"Asunto":mensaje_asunto,
                                     "Emisor":cargar_datos[
                                                           indice_cuenta
@@ -222,37 +264,40 @@ def vista_de_sesion(indice_cuenta):
                                   }
                         cargar_datos[indice][
                                         "Bandeja de entrada"].append(mensaje)
-                        sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos)
+                        sobrescribir_archivo(cargar_datos)
+                        print("\n[+] Mensaje enviado exitosamente\n ")
                     elif opcion == "c":
                         break
                     else:
-                        print("No ingreso ninguna opcion valida")
+                        print("\n[!] No ingreso ninguna opcion valida\n")
                         continue
 
                     break
 
         elif opcion == 'b': 
-            print("Posibles destinatarios: ",listar_usuarios())
+            print("Posibles destinatarios:\n",listar_usuarios())
 
             lista = listar_usuarios()
 
-            mensaje_destinatario = input("Ingrese el destinatario: ")
+            mensaje_destinatario = input("Ingrese el destinatario:\n")
 
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
-                    # Realiza una operacion para buscar en cargar_datos
-                    # si el usuario al que se quiere enviar el mensaje
-                    # existe y asi poder manejar los datos de la 
-                    # Bandeja de entrada de este
+                    """
+                     Realiza una operacion para buscar en cargar_datos
+                     si el usuario al que se quiere enviar el mensaje
+                     existe y asi poder manejar los datos de la 
+                     Bandeja de entrada de este 
+                    """
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
 
                         indice = cargar_datos.index(usuarios)
                         mensaje_asunto = input("Ingrese el asunto "+
-                            "(opcional): ")
-                        mensaje_redactato = input("Escriba el mensaje: ")
+                            "(opcional):\n")
+                        mensaje_redactato = input("Escriba el mensaje:\n")
                         mensaje = {"Asunto":mensaje_asunto,
                                    "Emisor":cargar_datos[
                                                          indice_cuenta
@@ -262,15 +307,19 @@ def vista_de_sesion(indice_cuenta):
                         cargar_datos[indice]["Bandeja de entrada"].append(
                             mensaje)
 
-                        sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos) 
+                        sobrescribir_archivo(cargar_datos)
+                        print("\n[+] Mensaje enviado exitosamente\n ")
             else:
-                print("Destinatario no existente, volviendo al menú de"+
-                " usuario...")
+                print("\n[!] Destinatario no existente, volviendo al menú de"+
+                " usuario...\n")
 
 
         elif opcion == 'c':
 
             while True:
+                print("*****************************************************")
+                print("\tConfiguración de la cuenta")
+                print("*****************************************************")
                 print("Presione 'a' para configurar su password")
                 print("Presione 'b' para configurar su nombre")
                 print("Presione 'c' para configurar su apellido")
@@ -279,75 +328,80 @@ def vista_de_sesion(indice_cuenta):
                     "estudio")
                 print("Presione 'f' para salir de la configuración "+
                     "y volver al menú de usuario")
-                opcion = input("Digite su opción: ").lower()
+                print("*****************************************************")
+                print("*****************************************************\n")
+                opcion = input("Digite su opción: \n").lower()
 
                 if opcion == 'a':
                     while True:
 
-                        nueva_pass = input("Ingrese su nueva password: ")
-                        nueva_pass_confirmacion = input("Ingrese nuevamente"+
-                        " la password a cambiar: ")
+                        nueva_pass = getpass.getpass("Ingrese su nueva"+
+                            " password:\n")
+                        nueva_pass_confirmacion = getpass.getpass("Ingrese "+
+                            "nuevamente la password a cambiar:\n")
 
 
                         if nueva_pass != nueva_pass_confirmacion:
-                            print("No son iguales las password")
+                            print("\n[!] No son iguales las password\n")
                             continue
 
+                        encriptacion = nueva_pass.encode("UTF-8")
+                        nueva_pass = hashlib.sha256(encriptacion)
                         break
 
                     cargar_datos[indice_cuenta][
                                                 "Password"
-                                               ] = nueva_pass
+                                               ] = nueva_pass.hexdigest()
 
-                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
-                    print("Cambio de password realizada")
+                    sobrescribir_archivo(cargar_datos)
+                    print("\n[+] Cambio de password realizada\n")
 
                 elif opcion == 'b':
 
                     while True:
-                        nuevo_nombre = input("Ingrese su nuevo nombre: ")
+                        nuevo_nombre = input("Ingrese su nuevo nombre:\n")
                         if not nuevo_nombre.isalpha():
-                            print("El nombre debe ser alfabético")
+                            print("\n[!] El nombre debe ser alfabético\n")
                             continue
 
                         break
                     cargar_datos[indice_cuenta][
                                                 "Nombre"
                                                 ] = nuevo_nombre.capitalize()
-                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
-                    print("Cambio de nombre realizada")
+                    sobrescribir_archivo(cargar_datos)
+                    print("\n[+] Cambio de nombre realizada\n")
 
                 elif opcion == 'c':
                     while True:
 
                         nuevo_apellido = input(
-                            "Ingrese su nuevo apellido: ").capitalize()
+                            "Ingrese su nuevo apellido:\n").capitalize()
 
                         if not nuevo_apellido.isalpha():
-                            print("El nombre debe ser alfabético")
+                            print("\n[!] El nombre debe ser alfabético\n")
                             continue
 
                         break
                     cargar_datos[indice_cuenta][
                                                 "Apellido"
                                                ] = nuevo_apellido
-                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
-                    print("Cambio de apellido realizada")
+                    sobrescribir_archivo(cargar_datos)
+                    print("\n[+] Cambio de apellido realizada\n")
 
                 elif opcion == 'd':
 
-                    nueva_dirreccion = input("Ingrese su nueva dirección: ")
+                    nueva_dirreccion = input("Ingrese su nueva dirección:\n")
                     cargar_datos[indice_cuenta][
                                                 "Dirrecion"
                                                ] = nueva_dirreccion
-                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
-                    print("Cambio de dirección realizada")
+                    sobrescribir_archivo(cargar_datos)
+                    print("\n[+] Cambio de dirección realizada\n")
 
                 elif opcion == 'e':
 
 
                     nueva_casa_de_estudio = input("Ingrese su nueva casa de"+
-                        " estudio: ")
+                        " estudio:\n")
                     cargar_datos[
                                 indice_cuenta
                                 ][
@@ -355,8 +409,8 @@ def vista_de_sesion(indice_cuenta):
                                 ] = nueva_casa_de_estudio.capitalize()
 
 
-                    sobrescribir_archivo(RUTA_DEL_ARCHIVO,cargar_datos)
-                    print("Cambio de casa de estudio realizada")
+                    sobrescribir_archivo(cargar_datos)
+                    print("\n[+] Cambio de casa de estudio realizada\n")
 
                 elif opcion == 'f':
 
@@ -365,72 +419,82 @@ def vista_de_sesion(indice_cuenta):
 
                 else:
 
-                    print("Opción no valida, ingrese una de las opciones"+
-                        " mostradas")
+                    print("\n[!]Opción no valida, ingrese una de las opciones"+
+                        " mostradas\n")
 
 
         elif opcion == 'd':
-            print("Saliendo de la cuenta...")
+            print("\n[*] Saliendo de la cuenta...\n")
             break
                 
         else:
-            print("Opción no valida, ingrese una de las opciones mostradas")
+            print("\n[!] Opción no valida, ingrese una de las opciones mostradas\n")
 
-def vista_de_administrador():
+def vista_de_administrador(indice_cuenta):
     """
     Muestra todas las opciones para el administrador, las opciones que se 
     despliegan son las siguientes:  
-
     a) Eliminar un usuario: Opción para visualizar los usuarios
         creados, los cuales pueden ser eliminados.
-
     b) Eliminar un mensaje: Opción que visualiza los usuarios
         de la aplicacion y permite la eliminacion de los mensajes
         recibidos por este usuario
-
     c) Redactar un mensaje: Envió de mensajes a los usuarios
         de la aplicación.
-
-    d) Salir del administrador y volver al menu principal.
-
+    d)	Bandeja de entrada: Opción para visualizar los mensajes 
+        recibidos, los cuales puede responder o eliminar.
+    e) Salir del administrador y volver al menu principal.
+    Argumentos:
+        indice_cuenta (String): índice que ayudaa a manejar
+        los datos de la posicion del administrador.
 """
 
-    cargar_datos = cargar_archivo(RUTA_DEL_ARCHIVO)
+    cargar_datos = cargar_archivo()
     while True:
-        print("Bienvenido administrador")
+        print("*********************************************************")
+        print("\tBienvenido al panel de administrador")
+        print("*********************************************************")
         print("Presione 'a' para eliminar un usuario")
         print("Presione 'b' para eliminar un mensaje de un usuario")
-        print("Presione 'c' para redactar un mensaje") 
-        print("Presione 'd' para salir del administrador")
-        opcion = input("Digite su opción: ").lower()
+        print("Presione 'c' para redactar un mensaje")
+        print("Presione 'd' para entrar bandeja de entrada") 
+        print("Presione 'e' para salir del administrador")
+        print("*********************************************************")
+        print("*********************************************************\n")
+        opcion = input("Digite su opción:\n").lower()
 
         if opcion == 'a':
-            print("Posibles usuarios a eliminar: ", listar_usuarios())
+            print("Posibles usuarios a eliminar:\n", listar_usuarios())
             lista = listar_usuarios()
 
-            usuario_eliminar = input("Ingrese al usuario: ").lower()
+            usuario_eliminar = input("Ingrese al usuario:\n").lower()
+            if usuario_eliminar == 'admin' or usuario_eliminar == 'administrador':
+            	print("No puedes eliminarme...")
+            	continue
 
-            if usuario_eliminar in lista:
+            elif usuario_eliminar in lista:
                 indice = lista.index(usuario_eliminar)
                 cargar_datos.pop(indice)
 
-                sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos)
-                print("Usuario eliminado correctamente")
+                sobrescribir_archivo(cargar_datos)
+                print("\n[+] Usuario eliminado correctamente\n")
             else:
-                print("Usuario no existente, volviendo al menú de"+
-                    " administrador...")
+                print("\n[!] Usuario no existente, volviendo al menú de"+
+                    " administrador...\n")
                 continue
 
         elif opcion == 'b':
             lista = listar_usuarios()
             print(lista)
             usuario_elegido = input("Ingrese a cual usuario quiere ver "+
-                "los mensajes: ").lower()
+                "los mensajes:\n").lower()
             if usuario_elegido in listar_usuarios():
 
                 for  elementos in cargar_datos:
-                    # Ayuda a cargar los datos del JSON para entregar
-                    # la bandeja de entrada de este usuario ingresado
+                    """
+                    Ayuda a cargar los datos del JSON para entregar
+                    la bandeja de entrada de este usuario ingresado.
+                    """
                     indice = listar_usuarios().index(usuario_elegido)
 
                     bandeja = cargar_datos[indice].get("Bandeja de entrada")
@@ -438,18 +502,20 @@ def vista_de_administrador():
                     while True:
                         if len(bandeja) == 0:
                             print(
-                                "No tiene ningún mensaje este usuario, "+
-                                "volviendo al menú de administrador...")
+                                "\n[!] No tiene ningún mensaje este usuario, "+
+                                "volviendo al menú de administrador...\n")
                             break
 
                         else:
                             i = 1
-                            print("\nMensajes recibidos")
+                            print("\nMensajes recibidos:\n")
 
                             for elementos in bandeja:
-                                # Ayuda a la impresion ordenada de los
-                                # datos de la bandeja de entrada del
-                                # usuario pedido
+                                """
+                                Ayuda a la impresion ordenada de los
+                                 datos de la bandeja de entrada del
+                                 usuario.
+                                """
                                 print("Mensaje nº",i,"\nFuente: "+
                                     elementos.get("Emisor")+"\tAsunto: "+
                                     elementos.get("Asunto"),
@@ -461,19 +527,19 @@ def vista_de_administrador():
                     if len(bandeja) != 0:
 
                         while True:
-                            eliminar_mensaje = input("Ingrese el número del"
-                            +" mensaje a eliminar: ")
+                            eliminar_mensaje = input("\nIngrese el número del"
+                            +" mensaje a eliminar:\n")
 
                             if not eliminar_mensaje.isdigit():
-                                print("ingrese valores correctos para "+
-                                    "eliminar")
+                                print("\n[!] ingrese valores correctos para "+
+                                    "eliminar\n")
                                 continue
 
                             elif (int(eliminar_mensaje) <= 0 or 
                                  int(eliminar_mensaje) > len(bandeja)):
 
-                                print("ingrese valores correctos para "+
-                                    "eliminar")
+                                print("\n[!] ingrese valores correctos para "+
+                                    "eliminar\n")
                                 continue
 
                             else:
@@ -482,59 +548,181 @@ def vista_de_administrador():
                                 "Bandeja de entrada"].pop(int(
                                                             eliminar_mensaje))
 
-                                print("Mensaje eliminado correctame")
-                                sobrescribir_archivo(RUTA_DEL_ARCHIVO,
-                                                 cargar_datos)
+                                print("\n[+] Mensaje eliminado correctame\n")
+                                sobrescribir_archivo(cargar_datos)
                             break
                     break    
             else:
-                print("Usuario no existente, volviendo al menú de"+
-                        " administrador...")
+                print("\n[!] Usuario no existente, volviendo al menú de"+
+                        " administrador...\n")
+
+        elif opcion == 'd':
+            bandeja = cargar_datos[indice_cuenta].get("Bandeja de entrada")
+
+            while True:
+                if len(bandeja) == 0:
+                    print(
+                        "\n[*] No tiene ningún nuevo mensaje, volviendo al"+
+                        " menú  de administrador...\n")
+                    break
+
+                else:
+
+                    i = 1
+                    print("***********************************")
+                    print("\n\tMensajes recibidos")
+                    print("***********************************")
+                    for elementos in bandeja:
+                        """
+                        Busca imprimir por pantalla de forma ordenada
+                        lo que contiene la bandeja de entrada de este usuario.
+                        """
+
+                        print("Mensaje nº",i,"\nFuente: "+elementos.get(
+                            "Emisor")+"\tAsunto: "+elementos.get("Asunto"),
+                        "\n\nMensaje:\n"+elementos.get("Mensaje")+"\n")
+
+                        i = i + 1 
+                    #print("***********************************")
+                    print("***********************************\n")
+                    break
+
+            if len(bandeja) != 0:
+
+                while True:
+                    print("*****************************")
+                    print("\tOpciones")
+                    print("*****************************")
+                    print("a.-Eliminar mensaje")
+                    print("b.-Responder")
+                    print("c.-Salir al menú de administrador")
+                    print("*****************************")
+                    print("*****************************\n")
+                    opcion = input("")
+                    opcion = opcion.lower()
+
+                    if opcion == "a":
+
+                        eliminar_mensaje = input("Ingrese el número del"
+                            +" mensaje a eliminar:\n")
+
+                        if not eliminar_mensaje.isdigit():
+                            print("\n[!] Ingrese valores correctos para eliminar\n")
+                            continue
+
+                        elif (int(eliminar_mensaje) <= 0 or 
+                             int(eliminar_mensaje) > len(bandeja)):
+
+                            print("\n[!] Ingrese valores correctos para eliminar\n")
+                            continue
+
+                        else:
+                            eliminar_mensaje = int(eliminar_mensaje) - 1
+                            cargar_datos[indice_cuenta][
+                            "Bandeja de entrada"].pop(int(eliminar_mensaje))
+
+                            print("\n[+] Mensaje eliminado correctamente\n")
+                            sobrescribir_archivo(cargar_datos)   
+
+                    elif opcion =="b":
+
+                        responder_mensaje = input("Ingrese el número del "+
+                            "mensaje a responder:\n")
+
+                        if not responder_mensaje.isdigit():
+                            print("\n[!]Ingrese valores correctos para "+
+                                "responder un mensaje\n")
+                            continue
+
+                        if (int(responder_mensaje) <= 0 or 
+                            int(responder_mensaje) > len(bandeja)):
+
+                            print("\n[!] Ingrese valores correctos para "+
+                                "responder un mensaje\n")
+                            continue
+
+                        responder_mensaje = int(responder_mensaje) - 1
+                        remitente = bandeja[responder_mensaje].get("Emisor")
+
+                        if bandeja[responder_mensaje].get(
+                                                "Emisor") == 'Administrador':
+                            print("\n[!] No puedes responder mensajes de aun"+
+                            " administrador\n")
+                            continue
+
+                        elif remitente in listar_usuarios():
+                            indice = listar_usuarios().index(remitente)
+                        mensaje_asunto = input("Ingrese el asunto "+
+                            "(opcional):\n")
+
+                        mensaje_redactato = input("Escriba el mensaje:\n")
+                        mensaje = {"Asunto":mensaje_asunto,
+                                    "Emisor":cargar_datos[
+                                                          indice_cuenta
+                                                         ].get("Usuario"),
+                                    "Mensaje":mensaje_redactato
+                                  }
+                        cargar_datos[indice][
+                                        "Bandeja de entrada"].append(mensaje)
+                        sobrescribir_archivo(cargar_datos)
+                        print("\n[+] Mensaje enviado exitosamente\n ")
+                    elif opcion == "c":
+                        break
+                    else:
+                        print("\n[!] No ingreso ninguna opcion valida\n")
+                        continue
+
+                    break
 
         elif opcion == 'c':
-            print("Posibles destinatarios: ",listar_usuarios())
+            print("Posibles destinatarios:\n",listar_usuarios())
 
             lista = listar_usuarios()
 
-            mensaje_destinatario = input("Ingrese el destinatario: ")
+            mensaje_destinatario = input("Ingrese el destinatario:\n")
 
             if mensaje_destinatario.lower() in lista:
 
                 for usuarios in cargar_datos:
-                    # Ayuda a cargar los datos del JSON 
-                    # para saber si el destinatario 
-                    # existe y poder manejar los datos de
-                    # la bandeja de entrada de este
+                    """
+                    carga los datos del JSON 
+                    para saber si el destinatario 
+                    existe y poder manejar los datos de
+                    la bandeja de entrada de este.
+                    """
 
                     if mensaje_destinatario.lower() in usuarios[
                                                        "Usuario"].lower():
 
                         indice = cargar_datos.index(usuarios)
                         mensaje_asunto = input("Ingrese el asunto "+
-                            "(opcional): ")
-                        mensaje_redactato = input("Escriba el mensaje: ")
+                            "(opcional):\n")
+                        mensaje_redactato = input("Escriba el mensaje:\n")
                         mensaje = {"Asunto":mensaje_asunto,
-                                   "Emisor":"Administrador",
+                                   "Emisor":cargar_datos[
+                                                          indice_cuenta
+                                                         ].get("Usuario"),
                                    "Mensaje":mensaje_redactato
                                    }
                         cargar_datos[indice]["Bandeja de entrada"].append(
                             mensaje)
 
-                        sobrescribir_archivo(RUTA_DEL_ARCHIVO, cargar_datos) 
+                        sobrescribir_archivo(cargar_datos)
+                        print("\n[+] Mensaje enviado exitosamente\n ") 
             else:
-                print("Destinatario no existente, volviendo al menú de"+
-                " administrador...")
+                print("\n[!] Destinatario no existente, volviendo al menú de"+
+                " administrador...\n")
 
-        elif opcion == 'd':
-            print("Saliendo del administrador...")
+        elif opcion == 'e':
+            print("\n[*] Saliendo del panel de administrador...\n")
             break
                 
         else:
-            print("Opción no valida, ingrese una de las opciones mostradas")
+            print("\n[!] Opción no valida, ingrese una de las opciones"+
+                " mostradas\n")
 
 def iniciar_sesion(nombre_usuario, 
-                   contra_usuario,
-                   archivo):
+                   contra_usuario):
     """
     Comprueba que el nombre y contraseña del usuario sean las
     correspondientes y le pasa el índice del usuario que esta 
@@ -543,36 +731,29 @@ def iniciar_sesion(nombre_usuario,
     Argumentos:
         nombre_usuario (String): Nombre del usuario.
         contra_usuario (String): Contraseña del usuario.
-        archivo (String): Ruta donde se encuentra guardado el archivo 
         JSON.
-
     """
-
-    cargar_datos = cargar_archivo(archivo)
+    cargar_datos = cargar_archivo()
 
     while True:
         if  nombre_usuario in listar_usuarios():
             indice = listar_usuarios().index(nombre_usuario)
-            if  cargar_datos[indice]["Password"] == contra_usuario:
-                print("Inicio de sesión exitosamente")
+
+            if nombre_usuario.lower() == 'admin':
+                if contra_usuario == "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918": #dejar asi 
+                    return vista_de_administrador(indice)
+
+            elif  cargar_datos[indice]["Password"] == contra_usuario:
+                print("\n[+] Inicio de sesión exitosa\n")
 
                 return vista_de_sesion(indice)
             else:
-                print("Error de inicio de sesión, volviendo al menú"+
-                " principal...")
+                print("\n[!] Error de inicio de sesión, volviendo al menú"+
+                " principal...\n")
                 break
-        elif nombre_usuario.lower() == 'admin':
-            if contra_usuario == 'admin':
-
-                return vista_de_administrador()
-            else:
-                print("Error de inicio de sesión,volviendo al menú"+
-                    " principal")
-                break
-
         else:
-            print("Error de inicio de sesión, volviendo al menú "+
-                "principal...")
+            print("\n[!] Error de inicio de sesión, volviendo al menú "+
+                "principal...\n")
             break
 
 
@@ -580,49 +761,60 @@ def main():
     """
     Menú principal en el cual se maneja todo el programa, obteniendo
     los datos del usuario o el registro de este.
-
     """
-    while True:
+    inicializar()
 
-        print("Bienvenido al servicio de mensajería")
+    while True:
+        print("************************************************************")
+        print("\tBienvenido al servicio de mensajería")
+        print("************************************************************")
         print("Presione 'a' si quiere iniciar sesión")
         print("Presione 'b' si quiere crear una nueva cuenta")
         print("Presione 'c' si quiere salir del servicio "+
             "de mensajería")
-
+        print("************************************************************")
+        print("************************************************************\n")
         opcion = input("Digite su opción: ").lower()
 
 
-        if opcion == 'a':       
+        if opcion == 'a':
 
-            nombre_inicio = input("Ingrese su nombre de usuario\n").lower()
-            contra_inicio = input("ingrese su password de usuario\n")
+            nombre_inicio = input("Nombre de usuario\n").lower()
+            contra_inicio = getpass.getpass("Password\n")
 
+            encriptacion =contra_inicio.encode("UTF-8")
+            contra_inicio = hashlib.sha256(encriptacion)
 
-            iniciar_sesion(nombre_inicio, contra_inicio, RUTA_DEL_ARCHIVO)
+            iniciar_sesion(nombre_inicio, contra_inicio.hexdigest())
+
 
 
         elif opcion == 'b':
 
+            print("***********************************************")  
+            print("\tFormulario para crear una cuenta")
+            print("***********************************************\n")
+
             while True:
                 lista = listar_usuarios()
-                nombre_usuario = input("Ingrese su nombre de usuario\n")
+                nombre_usuario = input("Ingrese su nombre de usuario:\n")
 
                 if nombre_usuario.lower() in lista:
-                    print("Ese nombre de usuario ya existe")
+                    print("\n[!] Ese nombre de usuario ya existe\n")
                     continue
                 elif nombre_usuario.lower() == 'admin':
-                    print("Ese nombre de usuario no esta permitido")
+                    print("\n[!] Ese nombre de usuario no esta permitido\n")
 
                 while True:    
-                    password = input("Ingrese su password de usuario\n")
-                    password_confirmacion = input("Ingrese nuevamente su "+
-                        "password de usuario\n")
+                    password = getpass.getpass("Ingrese su password de usuario\n")
+                    password_confirmacion = getpass.getpass("Ingrese "+
+                        "nuevamente su password de usuario\n")
 
                     if password != password_confirmacion:
-                        print("No son iguales las password")
+                        print("\n[!] No son iguales las password\n")
                         continue
-
+                    encriptacion = password.encode("UTF-8")
+                    password = hashlib.sha256(encriptacion)
                     break
 
                 while True:
@@ -630,7 +822,7 @@ def main():
                     nombre_real = input("Ingrese su nombre\n").capitalize()
 
                     if not nombre_real.isalpha():
-                        print("El nombre debe ser alfabético")
+                        print("\n[!] El nombre debe ser alfabético\n")
                         continue
 
                     break
@@ -641,37 +833,29 @@ def main():
 
                     if not apellido.isalpha():
 
-                        print("El apellido debe ser alfabético")
+                        print("\n[!] El apellido debe ser alfabético\n")
                         continue
 
                     break
 
                 direccion = input("Ingrese su dirección\n")
 
-                while True:
-
-                    casa_de_estudio = input(
+                casa_de_estudio = input(
                         "Ingrese su casa de estudio\n").capitalize()
-
-                    if not casa_de_estudio.isalpha():
-                        print("La casa de estudio debe ser alfabético")
-                        continue
-
-                    break
 
                 break
 
-            crear_usuario(nombre_usuario, password, 
+            crear_usuario(nombre_usuario, password.hexdigest(), 
                             nombre_real, apellido,
                             direccion, casa_de_estudio)
 
         elif opcion == 'c':
 
-            print("Saliendo del programa...")
+            print("\n[*] Saliendo del programa...\n")
             break
 
         else:
 
-            print("Opción no valida, ingrese una de las opciones mostradas")
+            print("\n[!] Opción no valida, ingrese una de las opciones mostradas\n")
 
 main()
