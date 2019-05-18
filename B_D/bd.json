@@ -1,42 +1,7 @@
 [
     {
-        "Nombre": "Christopher",
-        "Apellido": "Pavez",
-        "Usuario": "lactunkk",
-        "Password": "chris",
-        "Dirrecion": "Puerto montt",
-        "Casa estudio": "Ulagos",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "gracias",
-                "Emisor": "lactunkk",
-                "Mensaje": "guapeton"
-            },
-            {
-                "Asunto": "holi",
-                "Emisor": "Administrador",
-                "Mensaje": "l"
-            },
-            {
-                "Asunto": "chupa",
-                "Emisor": "Administrador",
-                "Mensaje": "el copi"
-            }
-        ]
-    },
-    {
-        "Nombre": "Leo",
-        "Apellido": "Pavez",
-        "Usuario": "leo",
-        "Password": "papa",
-        "Dirrecion": "calle",
-        "Casa estudio": "Fach",
-        "Bandeja de entrada": [
-            {
-                "Asunto": "hola",
-                "Emisor": "lactunkk",
-                "Mensaje": "paa"
-            }
-        ]
+        "Usuario": "admin",
+        "Password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+        "Bandeja de entrada": []
     }
 ]
