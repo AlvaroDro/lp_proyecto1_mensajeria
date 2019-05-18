@@ -1,7 +1,33 @@
 [
     {
+<<<<<<< HEAD
         "Usuario": "admin",
         "Password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
         "Bandeja de entrada": []
+=======
+        "Dirrecion": "aaaa",
+        "Apellido": "Sssss",
+        "Bandeja de entrada": [
+            {
+                "Emisor": "asd",
+                "Mensaje": "Hola como estas que tengas suerte ",
+                "Asunto": "lol"
+            },
+            {
+                "Emisor": "asd",
+                "Mensaje": "",
+                "Asunto": ""
+            },
+            {
+                "Emisor": "asd",
+                "Mensaje": "",
+                "Asunto": ""
+            }
+        ],
+        "Casa estudio": "Wwwww",
+        "Password": "688787d8ff144c502c7f5cffaafe2cc588d86079f9de88304c26b0cb99ce91c6",
+        "Nombre": "Hola",
+        "Usuario": "asd"
+>>>>>>> 99b83a980a2fa7aaf2d9e7afae1a524360d2b400
     }
 ]
