@@ -1,6 +1,2 @@
-# Proyecto de mensajería
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg2ODY2MDI0MiwtMjE3NDY0MTIzLDE4Nj
-g2NjAyNDIsNzUwNzA5ODkyXX0=
--->
+# Messaging project
+Project for the programming language course, that consist in a simple messaging programm which allows you to send messages and save them in a JSON file.
